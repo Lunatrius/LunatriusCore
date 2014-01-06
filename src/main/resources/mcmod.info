@@ -1,0 +1,25 @@
+{
+	"modinfoversion": 2,
+	"modlist": [
+		{
+			"modid": "${modid}",
+			"name": "${modname}",
+			"description": "${description}",
+			"mcversion": "${mcversion}",
+			"version": "${version}",
+			"authors": [
+				"Lunatrius"
+			],
+			"credits": "",
+			"dependants": [  ],
+			"dependencies": [  ],
+			"parent": "",
+			"requiredMods": [  ],
+			"logoFile": "",
+			"screenshots": [  ],
+			"updateUrl": "http://mc.lunatri.us/",
+			"url": "http://mc.lunatri.us/",
+			"useDependencyInformation": true
+		}
+	]
+}
