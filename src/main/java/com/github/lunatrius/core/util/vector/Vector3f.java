@@ -80,7 +80,11 @@ public class Vector3f extends Vector2f {
 	}
 
 	public boolean equals(Vector3f vec) {
-		return super.equals(vec) && this.z == vec.z;
+		return equals(vec, FLOAT_EPSILON);
+	}
+
+	public boolean equals(Vector3f vec, float epsilon) {
+		return super.equals(vec) && Math.abs(this.z - vec.z) < epsilon;
 	}
 
 	@Override

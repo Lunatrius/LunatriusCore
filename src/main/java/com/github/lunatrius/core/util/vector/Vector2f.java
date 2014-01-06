@@ -1,6 +1,7 @@
 package com.github.lunatrius.core.util.vector;
 
 public class Vector2f {
+	public static final float FLOAT_EPSILON = 10e-6f;
 	float x;
 	float y;
 
@@ -99,7 +100,11 @@ public class Vector2f {
 	}
 
 	public boolean equals(Vector2f vec) {
-		return this.x == vec.x && this.y == vec.y;
+		return equals(vec, FLOAT_EPSILON);
+	}
+
+	public boolean equals(Vector2f vec, float epsilon) {
+		return Math.abs(this.x - vec.x) < epsilon && Math.abs(this.y - vec.y) < epsilon;
 	}
 
 	@Override
