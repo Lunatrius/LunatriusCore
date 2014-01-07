@@ -1,5 +1,5 @@
 {
-	"modinfoversion": 2,
+	"modListVersion": 2,
 	"modList": [
 		{
 			"modid": "${modid}",
@@ -7,7 +7,7 @@
 			"description": "${description}",
 			"mcversion": "${mcversion}",
 			"version": "${version}",
-			"authors": [
+			"authorList": [
 				"Lunatrius"
 			],
 			"credits": "",
