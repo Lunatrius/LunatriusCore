@@ -14,15 +14,15 @@ import java.util.*;
 
 public class VersionChecker {
 	private static final List<ModMetadata> REGISTERED_MODS = new ArrayList<ModMetadata>();
-	private static final Set<String> OUTDATED_MODS = new HashSet<String>();
+	private static final Map<String, String> OUTDATED_MODS = new HashMap<String, String>();
 	private static boolean done = false;
 
 	public static void registerMod(ModMetadata modMetadata) {
 		REGISTERED_MODS.add(modMetadata);
 	}
 
-	public static Set<String> getOutdatedMods() {
-		return OUTDATED_MODS;
+	public static Set<Map.Entry<String, String>> getOutdatedMods() {
+		return OUTDATED_MODS.entrySet();
 	}
 
 	public static void setDone(boolean isDone) {
@@ -57,7 +57,7 @@ public class VersionChecker {
 								int diff = versionRemote.compareTo(versionLocal);
 
 								if (diff > 0) {
-									OUTDATED_MODS.add(modMetadata.name);
+									OUTDATED_MODS.put(modMetadata.name, versionLocal + " -> " + versionRemote);
 									modMetadata.description += "\nUpdate available!";
 									LunatriusCore.logger.info(String.format("Update is available for %s!", modid));
 								} else if (diff == 0) {
