@@ -53,13 +53,6 @@ public class VersionTicker {
 	}
 
 	private IChatComponent getChatComponentHover(String name, String version) {
-		IChatComponent chatComponentHover = new ChatComponentText("");
-		IChatComponent chatComponentModName = new ChatComponentText(name);
-
-		chatComponentModName.func_150256_b().func_150238_a(EnumChatFormatting.GREEN);
-		chatComponentHover.func_150257_a(chatComponentModName);
-		chatComponentHover.func_150257_a(new ChatComponentText(": " + version));
-
-		return chatComponentHover;
+		return new ChatComponentText(String.format("%s%s%s: %s", EnumChatFormatting.GREEN, name, EnumChatFormatting.RESET, version));
 	}
 }
