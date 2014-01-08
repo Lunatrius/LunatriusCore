@@ -88,6 +88,10 @@ public class Vector2i {
 		return this;
 	}
 
+	public Vector2f toVector2f() {
+		return new Vector2f(this.x, this.y);
+	}
+
 	@Override
 	public Vector2i clone() {
 		return new Vector2i(this);

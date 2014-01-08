@@ -89,6 +89,10 @@ public class Vector2f {
 		return this;
 	}
 
+	public Vector2i toVector2i() {
+		return new Vector2i((int) Math.floor(this.x), (int) Math.floor(this.y));
+	}
+
 	@Override
 	public Vector2f clone() {
 		return new Vector2f(this);

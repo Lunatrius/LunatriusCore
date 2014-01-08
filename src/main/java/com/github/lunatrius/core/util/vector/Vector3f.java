@@ -69,6 +69,10 @@ public class Vector3f extends Vector2f {
 		return this;
 	}
 
+	public Vector3i toVector3i() {
+		return new Vector3i((int) Math.floor(this.x), (int) Math.floor(this.y), (int) Math.floor(this.z));
+	}
+
 	@Override
 	public Vector3f clone() {
 		return new Vector3f(this);
