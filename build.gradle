@@ -46,8 +46,6 @@ processResources {
         include "version.properties"
 
         expand (["modid": config.mod.id,
-            "modname": config.mod.name,
-            "description": config.mod.description,
             "version": version,
             "mcversion": config.version.minecraft,
             "forgeversion": config.version.forge

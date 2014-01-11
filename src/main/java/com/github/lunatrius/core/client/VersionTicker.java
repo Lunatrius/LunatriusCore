@@ -24,7 +24,7 @@ public class VersionTicker {
 				Set<Map.Entry<String, String>> outdatedMods = VersionChecker.getOutdatedMods();
 
 				if (outdatedMods.size() > 0) {
-					minecraft.thePlayer.func_146105_b(new ChatComponentTranslation("message.updatesavailable", getChatComponentModList(outdatedMods)));
+					minecraft.thePlayer.func_146105_b(new ChatComponentTranslation("message.core.updatesavailable", getChatComponentModList(outdatedMods)));
 				}
 
 				FMLCommonHandler.instance().bus().unregister(this);

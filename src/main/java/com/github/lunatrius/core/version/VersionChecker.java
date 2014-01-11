@@ -1,12 +1,12 @@
 package com.github.lunatrius.core.version;
 
 import com.github.lunatrius.core.LunatriusCore;
+import com.github.lunatrius.core.lib.Reference;
 import com.google.common.io.ByteStreams;
 import com.google.gson.Gson;
 import cpw.mods.fml.common.ModMetadata;
 import cpw.mods.fml.common.versioning.ArtifactVersion;
 import cpw.mods.fml.common.versioning.DefaultArtifactVersion;
-import net.minecraftforge.common.MinecraftForge;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -19,6 +19,10 @@ public class VersionChecker {
 
 	public static void registerMod(ModMetadata modMetadata) {
 		REGISTERED_MODS.add(modMetadata);
+
+		if (modMetadata.description != null) {
+			modMetadata.description += String.format("\n---\nRecommended Forge: %s", Reference.FORGE);
+		}
 	}
 
 	public static Set<Map.Entry<String, String>> getOutdatedMods() {
@@ -38,7 +42,7 @@ public class VersionChecker {
 			@Override
 			public void run() {
 				try {
-					URL url = new URL(String.format("http://mc.lunatri.us/json?latest=1&mc=%s", MinecraftForge.MC_VERSION));
+					URL url = new URL(String.format("http://mc.lunatri.us/json?latest=1&mc=%s", Reference.MINECRAFT));
 					InputStream con = url.openStream();
 					String data = new String(ByteStreams.toByteArray(con));
 					con.close();
@@ -57,9 +61,9 @@ public class VersionChecker {
 								int diff = versionRemote.compareTo(versionLocal);
 
 								if (diff > 0) {
-									OUTDATED_MODS.put(modMetadata.name, versionLocal + " -> " + versionRemote);
-									modMetadata.description += "\nUpdate available!";
-									LunatriusCore.logger.info(String.format("Update is available for %s!", modid));
+									OUTDATED_MODS.put(modMetadata.name, String.format("%s -> %s", versionLocal, versionRemote));
+									modMetadata.description += String.format("\nUpdate is available (%s -> %s)!", versionLocal, versionRemote);
+									LunatriusCore.logger.info(String.format("Update is available for %s (%s -> %s)!", modid, versionLocal, versionRemote));
 								} else if (diff == 0) {
 									modMetadata.description += "\nUp to date!";
 									LunatriusCore.logger.info(String.format("%s is up to date!", modid));

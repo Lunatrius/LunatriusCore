@@ -1,5 +1,6 @@
 package com.github.lunatrius.core;
 
+import com.github.lunatrius.core.lib.Reference;
 import com.github.lunatrius.core.version.VersionChecker;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -9,9 +10,9 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = "LunatriusCore")
+@Mod(modid = Reference.MODID, name = Reference.NAME)
 public class LunatriusCore {
-	@SidedProxy(serverSide = "com.github.lunatrius.core.CommonProxy", clientSide = "com.github.lunatrius.core.client.ClientProxy")
+	@SidedProxy(serverSide = Reference.PROXY_COMMON, clientSide = Reference.PROXY_CLIENT)
 	public static CommonProxy proxy;
 
 	public static Logger logger = null;

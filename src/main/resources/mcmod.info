@@ -2,9 +2,9 @@
 	"modListVersion": 2,
 	"modList": [
 		{
-			"modid": "${modid}",
-			"name": "${modname}",
-			"description": "${description}",
+			"modid": "LunatriusCore",
+			"name": "LunatriusCore",
+			"description": "A collection of utilities for Lunatrius' mods.",
 			"mcversion": "${mcversion}",
 			"version": "${version}",
 			"authorList": [
