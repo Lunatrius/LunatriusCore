@@ -12,6 +12,10 @@ public class Vector2i {
 		this(vec.x, vec.y);
 	}
 
+	public Vector2i(int num) {
+		this(num, num);
+	}
+
 	public Vector2i(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -82,9 +86,21 @@ public class Vector2i {
 		return this;
 	}
 
+	public Vector2i add(int x, int y) {
+		this.x += x;
+		this.y += y;
+		return this;
+	}
+
 	public Vector2i sub(Vector2i vec) {
 		this.x -= vec.x;
 		this.y -= vec.y;
+		return this;
+	}
+
+	public Vector2i sub(int x, int y) {
+		this.x -= x;
+		this.y -= y;
 		return this;
 	}
 

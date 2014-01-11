@@ -13,6 +13,10 @@ public class Vector2f {
 		this(vec.x, vec.y);
 	}
 
+	public Vector2f(float num) {
+		this(num, num);
+	}
+
 	public Vector2f(float x, float y) {
 		this.x = x;
 		this.y = y;
@@ -83,9 +87,21 @@ public class Vector2f {
 		return this;
 	}
 
+	public Vector2f add(float x, float y) {
+		this.x += x;
+		this.y += y;
+		return this;
+	}
+
 	public Vector2f sub(Vector2f vec) {
 		this.x -= vec.x;
 		this.y -= vec.y;
+		return this;
+	}
+
+	public Vector2f sub(float x, float y) {
+		this.x -= x;
+		this.y -= y;
 		return this;
 	}
 

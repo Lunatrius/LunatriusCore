@@ -11,6 +11,10 @@ public class Vector3i extends Vector2i {
 		this(vec.x, vec.y, vec.z);
 	}
 
+	public Vector3i(int num) {
+		this(num, num, num);
+	}
+
 	public Vector3i(int x, int y, int z) {
 		super(x, y);
 		this.z = z;
@@ -63,9 +67,21 @@ public class Vector3i extends Vector2i {
 		return this;
 	}
 
+	public Vector3i add(int x, int y, int z) {
+		super.add(x, y);
+		this.z += z;
+		return this;
+	}
+
 	public Vector3i sub(Vector3i vec) {
 		super.sub(vec);
 		this.z -= vec.z;
+		return this;
+	}
+
+	public Vector3i sub(int x, int y, int z) {
+		super.sub(x, y);
+		this.z -= z;
 		return this;
 	}
 

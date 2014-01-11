@@ -11,6 +11,10 @@ public class Vector4f extends Vector3f {
 		this(vec.x, vec.y, vec.z, vec.w);
 	}
 
+	public Vector4f(float num) {
+		this(num, num, num, num);
+	}
+
 	public Vector4f(float x, float y, float z, float w) {
 		super(x, y, z);
 		this.w = w;
@@ -63,9 +67,21 @@ public class Vector4f extends Vector3f {
 		return this;
 	}
 
+	public Vector4f add(float x, float y, float z, float w) {
+		super.add(x, y, z);
+		this.w += w;
+		return this;
+	}
+
 	public Vector4f sub(Vector4f vec) {
 		super.sub(vec);
 		this.w -= vec.w;
+		return this;
+	}
+
+	public Vector4f sub(float x, float y, float z, float w) {
+		super.sub(x, y, z);
+		this.w -= w;
 		return this;
 	}
 

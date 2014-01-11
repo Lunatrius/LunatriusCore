@@ -11,6 +11,10 @@ public class Vector3f extends Vector2f {
 		this(vec.x, vec.y, vec.z);
 	}
 
+	public Vector3f(float num) {
+		this(num, num, num);
+	}
+
 	public Vector3f(float x, float y, float z) {
 		super(x, y);
 		this.z = z;
@@ -63,9 +67,21 @@ public class Vector3f extends Vector2f {
 		return this;
 	}
 
+	public Vector3f add(float x, float y, float z) {
+		super.add(x, y);
+		this.z += z;
+		return this;
+	}
+
 	public Vector3f sub(Vector3f vec) {
 		super.sub(vec);
 		this.z -= vec.z;
+		return this;
+	}
+
+	public Vector3f sub(float x, float y, float z) {
+		super.sub(x, y);
+		this.z -= z;
 		return this;
 	}
 
