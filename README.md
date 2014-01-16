@@ -1,5 +1,5 @@
 ## Welcome to LunatriusCore!
-[Compiling LunatriusCore](#compiling-lunatriuscore) - for those that want the latest unreleased features
+[Compiling LunatriusCore](#compile-lunatriuscore) - for those that want the latest unreleased features
 
 [Contributing](#contributing) - for those that want to help out
 
