@@ -33,7 +33,11 @@ archivesBaseName = "[${config.version.minecraft}]${config.mod.id}"
 
 minecraft {
     version = "${config.version.minecraft}-${config.version.forge}"
-    assetDir = "run/assets"
+
+    if (!project.hasProperty("run_location"))
+        assetDir = "run/assets"
+    else
+        assetDir = run_location.replace("{modid}", config.mod.id).replace("{mcversion}", config.version.minecraft) + "assets"
 }
 
 jar {
@@ -94,7 +98,19 @@ task signJar(dependsOn: "reobf") {
     }
 }
 
-task release(dependsOn: "signJar", type: Copy) {
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    appendix = "universal"
+    classifier = "deobf"
+}
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allSource
+    appendix = "universal"
+    classifier = "src"
+}
+
+task release(dependsOn: ["sourceJar", "deobfJar", "signJar"], type: Copy) {
     from project.tasks.jar.destinationDir
     into project.file(project.release_location)
 
@@ -105,14 +121,4 @@ task release(dependsOn: "signJar", type: Copy) {
     onlyIf {
         return project.release_location != "."
     }
-}
-
-task sourceJar(type: Jar) {
-    from sourceSets.main.allSource
-    classifier = 'src'
-}
-
-// temporary :deobf fix
-reobf {
-    deobfFile = new net.minecraftforge.gradle.delayed.DelayedFile(project, "build/tmp/deobfBinJar/deobfed.jar")
 }
