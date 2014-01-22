@@ -2,6 +2,7 @@ package com.github.lunatrius.core.version;
 
 import com.github.lunatrius.core.LunatriusCore;
 import com.github.lunatrius.core.lib.Reference;
+import com.github.lunatrius.core.lib.Strings;
 import com.google.common.io.ByteStreams;
 import com.google.gson.Gson;
 import cpw.mods.fml.common.ModMetadata;
@@ -21,7 +22,7 @@ public class VersionChecker {
 		REGISTERED_MODS.add(modMetadata);
 
 		if (modMetadata.description != null) {
-			modMetadata.description += String.format("\n---\nRecommended Forge: %s", Reference.FORGE);
+			modMetadata.description += String.format(Strings.VERCHECK_RECOMMENDED_FORGE, Reference.FORGE);
 		}
 	}
 
@@ -42,7 +43,7 @@ public class VersionChecker {
 			@Override
 			public void run() {
 				try {
-					URL url = new URL(String.format("http://mc.lunatri.us/json?latest=1&mc=%s", Reference.MINECRAFT));
+					URL url = new URL(String.format(Strings.VERCHECK_URL, Reference.MINECRAFT));
 					InputStream con = url.openStream();
 					String data = new String(ByteStreams.toByteArray(con));
 					con.close();
@@ -61,14 +62,14 @@ public class VersionChecker {
 								int diff = versionRemote.compareTo(versionLocal);
 
 								if (diff > 0) {
-									OUTDATED_MODS.put(modMetadata.name, String.format("%s -> %s", versionLocal, versionRemote));
-									modMetadata.description += String.format("\nUpdate is available (%s -> %s)!", versionLocal, versionRemote);
-									LunatriusCore.logger.info(String.format("Update is available for %s (%s -> %s)!", modid, versionLocal, versionRemote));
+									OUTDATED_MODS.put(modMetadata.name, String.format(Strings.VERCHECK_VERSION, versionLocal, versionRemote));
+									modMetadata.description += String.format(Strings.VERCHECK_UPDATEAVAILABLE, versionLocal, versionRemote);
+									LunatriusCore.logger.info(String.format(Strings.VERCHECK_UPDATEAVAILABLECON, modid, versionLocal, versionRemote));
 								} else if (diff == 0) {
-									modMetadata.description += "\nUp to date!";
-									LunatriusCore.logger.info(String.format("%s is up to date!", modid));
+									modMetadata.description += Strings.VERCHECK_UPTODATE;
+									LunatriusCore.logger.info(String.format(Strings.VERCHECK_UPTODATECON, modid));
 								} else {
-									LunatriusCore.logger.info(String.format("Is %s from the future?", modid));
+									LunatriusCore.logger.info(String.format(Strings.VERCHECK_FUTURECON, modid));
 								}
 							} catch (Exception ignored) {
 							}
