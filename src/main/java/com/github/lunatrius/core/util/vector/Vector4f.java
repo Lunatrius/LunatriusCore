@@ -1,7 +1,7 @@
 package com.github.lunatrius.core.util.vector;
 
 public class Vector4f extends Vector3f {
-	float w;
+	public float w;
 
 	public Vector4f() {
 		this(0, 0, 0, 0);

@@ -1,8 +1,8 @@
 package com.github.lunatrius.core.util.vector;
 
 public class Vector2i {
-	int x;
-	int y;
+	public int x;
+	public int y;
 
 	public Vector2i() {
 		this(0, 0);

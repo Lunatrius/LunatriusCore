@@ -2,8 +2,8 @@ package com.github.lunatrius.core.util.vector;
 
 public class Vector2f {
 	public static final float FLOAT_EPSILON = 10e-6f;
-	float x;
-	float y;
+	public float x;
+	public float y;
 
 	public Vector2f() {
 		this(0, 0);
