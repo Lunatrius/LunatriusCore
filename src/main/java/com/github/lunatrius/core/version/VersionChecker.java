@@ -1,6 +1,5 @@
 package com.github.lunatrius.core.version;
 
-import com.github.lunatrius.core.LunatriusCore;
 import com.github.lunatrius.core.lib.Reference;
 import com.github.lunatrius.core.lib.Strings;
 import com.google.common.io.ByteStreams;
@@ -66,15 +65,19 @@ public class VersionChecker {
 								int diff = versionRemote.compareTo(versionLocal);
 
 								if (diff > 0) {
-									OUTDATED_MODS.put(modMetadata.name, String.format(Strings.VERCHECK_VERSION, versionLocal, versionRemote));
+									if (Reference.config.canNotifyOfUpdate(modid, versionRemote.getVersionString())) {
+										OUTDATED_MODS.put(modMetadata.name, String.format(Strings.VERCHECK_VERSION, versionLocal, versionRemote));
+									}
 									modMetadata.description += String.format(Strings.VERCHECK_UPDATEAVAILABLE, versionLocal, versionRemote);
-									LunatriusCore.logger.info(String.format(Strings.VERCHECK_UPDATEAVAILABLECON, modid, versionLocal, versionRemote));
+									Reference.logger.info(String.format(Strings.VERCHECK_UPDATEAVAILABLECON, modid, versionLocal, versionRemote));
 								} else if (diff == 0) {
 									modMetadata.description += Strings.VERCHECK_UPTODATE;
-									LunatriusCore.logger.info(String.format(Strings.VERCHECK_UPTODATECON, modid));
+									Reference.logger.info(String.format(Strings.VERCHECK_UPTODATECON, modid));
 								} else {
-									LunatriusCore.logger.info(String.format(Strings.VERCHECK_FUTURECON, modid));
+									Reference.logger.info(String.format(Strings.VERCHECK_FUTURECON, modid));
 								}
+
+								Reference.config.addUpdate(modid, versionRemote.getVersionString());
 							} catch (Exception ignored) {
 							}
 						}
