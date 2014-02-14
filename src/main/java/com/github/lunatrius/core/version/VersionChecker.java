@@ -19,10 +19,14 @@ public class VersionChecker {
 	private static boolean done = false;
 
 	public static void registerMod(ModMetadata modMetadata) {
+		registerMod(modMetadata, Reference.FORGE);
+	}
+
+	public static void registerMod(ModMetadata modMetadata, String forgeVersion) {
 		REGISTERED_MODS.add(modMetadata);
 
 		if (modMetadata.description != null) {
-			modMetadata.description += String.format(Strings.VERCHECK_RECOMMENDED_FORGE, Reference.FORGE);
+			modMetadata.description += String.format(Strings.VERCHECK_RECOMMENDED_FORGE, forgeVersion);
 		}
 	}
 

@@ -27,7 +27,7 @@ configFile.withReader {
 
 ext.build = System.getenv().BUILD_NUMBER ?: "dev"
 
-group = "com.github.lunatrius.${config.mod.package}"
+group = "com.github.lunatrius"
 version = "${config.version.major}.${config.version.minor}.${config.version.micro}.${build}"
 archivesBaseName = "[${config.version.minecraft}]${config.mod.id}"
 

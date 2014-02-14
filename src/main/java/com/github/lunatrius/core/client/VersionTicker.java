@@ -25,7 +25,7 @@ public class VersionTicker {
 				Set<Map.Entry<String, String>> outdatedMods = VersionChecker.getOutdatedMods();
 
 				if (outdatedMods.size() > 0) {
-					minecraft.thePlayer.func_146105_b(new ChatComponentTranslation(Strings.MESSAGE_UPDATESAVAILABLE, getChatComponentModList(outdatedMods)));
+					minecraft.thePlayer.addChatComponentMessage(new ChatComponentTranslation(Strings.MESSAGE_UPDATESAVAILABLE, getChatComponentModList(outdatedMods)));
 				}
 
 				FMLCommonHandler.instance().bus().unregister(this);
@@ -37,20 +37,20 @@ public class VersionTicker {
 		IChatComponent chatComponentModList = new ChatComponentText("[");
 
 		for (Map.Entry<String, String> mod : mods) {
-			if (chatComponentModList.func_150253_a().size() > 0) {
-				chatComponentModList.func_150258_a(", ");
+			if (chatComponentModList.getSiblings().size() > 0) {
+				chatComponentModList.appendText(", ");
 			}
 
 			IChatComponent chatComponentMod = new ChatComponentText(mod.getKey());
-			ChatStyle chatStyle = chatComponentMod.func_150256_b();
+			ChatStyle chatStyle = chatComponentMod.getChatStyle();
 
-			chatStyle.func_150238_a(EnumChatFormatting.GRAY);
-			chatStyle.func_150209_a(new HoverEvent(HoverEvent.Action.SHOW_TEXT, getChatComponentHover(mod.getKey(), mod.getValue())));
+			chatStyle.setColor(EnumChatFormatting.GRAY);
+			chatStyle.setChatHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, getChatComponentHover(mod.getKey(), mod.getValue())));
 
-			chatComponentModList.func_150257_a(chatComponentMod);
+			chatComponentModList.appendSibling(chatComponentMod);
 		}
 
-		return chatComponentModList.func_150258_a("]");
+		return chatComponentModList.appendText("]");
 	}
 
 	private IChatComponent getChatComponentHover(String name, String version) {
