@@ -1,6 +1,7 @@
 package com.github.lunatrius.core.config;
 
 import com.google.common.base.Joiner;
+import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Property;
 
 import java.io.File;
@@ -20,6 +21,26 @@ public class Configuration {
 
 	public void save() {
 		this.config.save();
+	}
+
+	public net.minecraftforge.common.config.Configuration getConfig() {
+		return this.config;
+	}
+
+	public boolean hasCategory(String category) {
+		return this.config.hasCategory(category);
+	}
+
+	public boolean hasKey(String category, String key) {
+		return this.config.hasKey(category, key);
+	}
+
+	public ConfigCategory getCategory(String category) {
+		return this.config.getCategory(category);
+	}
+
+	public void addCustomCategoryComment(String category, String comment) {
+		this.config.addCustomCategoryComment(category, comment);
 	}
 
 	public Property get(String category, String key, String defaultValue, String comment) {
