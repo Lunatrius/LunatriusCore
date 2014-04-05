@@ -10,7 +10,11 @@ import cpw.mods.fml.common.versioning.DefaultArtifactVersion;
 
 import java.io.InputStream;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class VersionChecker {
 	private static final List<ModMetadata> REGISTERED_MODS = new ArrayList<ModMetadata>();

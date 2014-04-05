@@ -26,10 +26,11 @@ configFile.withReader {
 }
 
 ext.build = System.getenv().BUILD_NUMBER ?: "dev"
+ext.modversion = "${config.version.major}.${config.version.minor}.${config.version.micro}.${build}"
 
 group = "com.github.lunatrius"
-version = "${config.version.major}.${config.version.minor}.${config.version.micro}.${build}"
-archivesBaseName = "[${config.version.minecraft}]${config.mod.id}"
+version = "${config.version.minecraft}-${modversion}"
+archivesBaseName = config.mod.id
 
 minecraft {
     version = "${config.version.minecraft}-${config.version.forge}"
@@ -41,7 +42,7 @@ minecraft {
 }
 
 jar {
-    appendix = "universal"
+    classifier = "universal"
 }
 
 processResources {
@@ -50,7 +51,7 @@ processResources {
         include "version.properties"
 
         expand (["modid": config.mod.id,
-            "version": version,
+            "version": modversion,
             "mcversion": config.version.minecraft,
             "forgeversion": config.version.forge
         ])
@@ -100,14 +101,12 @@ task signJar(dependsOn: "reobf") {
 
 task deobfJar(type: Jar) {
     from sourceSets.main.output
-    appendix = "universal"
     classifier = "deobf"
 }
 
 task sourceJar(type: Jar) {
     from sourceSets.main.allSource
-    appendix = "universal"
-    classifier = "src"
+    classifier = "source"
 }
 
 task release(dependsOn: ["sourceJar", "deobfJar", "signJar"], type: Copy) {
