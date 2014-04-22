@@ -32,7 +32,7 @@ public class GuiNumericField extends GuiButton {
 		this.guiButtonDec = new GuiButton(0, x + width - BUTTON_WIDTH * 2, y, BUTTON_WIDTH, height, "-");
 		this.guiButtonInc = new GuiButton(1, x + width - BUTTON_WIDTH * 1, y, BUTTON_WIDTH, height, "+");
 
-		setValue(0);
+		setValue(DEFAULT_VALUE);
 	}
 
 	@Override
