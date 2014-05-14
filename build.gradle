@@ -57,7 +57,8 @@ processResources {
         expand (["modid": config.mod.id,
             "version": modversion,
             "mcversion": config.version.minecraft,
-            "forgeversion": config.version.forge
+            "forgeversion": config.version.forge,
+            "minforgeversion": config.version.minforge ?: config.version.forge
         ])
     }
 
