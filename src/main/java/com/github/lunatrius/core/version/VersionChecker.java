@@ -1,7 +1,7 @@
 package com.github.lunatrius.core.version;
 
+import com.github.lunatrius.core.handler.ConfigurationHandler;
 import com.github.lunatrius.core.lib.Reference;
-import com.github.lunatrius.core.lib.Strings;
 import com.google.common.io.ByteStreams;
 import com.google.gson.Gson;
 import cpw.mods.fml.common.ModMetadata;
@@ -17,6 +17,17 @@ import java.util.Map;
 import java.util.Set;
 
 public class VersionChecker {
+	public static final String RECOMMENDED_FORGE = "\n---\nRecommended Forge: %s";
+	public static final String URL = "http://mc.lunatri.us/json?latest=1&mc=%s";
+
+	public static final String VERSION = "%s -> %s";
+	public static final String UPDATEAVAILABLE = "\nUpdate is available (%s -> %s)!";
+	public static final String UPTODATE = "\nUp to date!";
+
+	public static final String UPDATEAVAILABLECON = "Update is available for %s (%s -> %s)!";
+	public static final String UPTODATECON = "%s is up to date!";
+	public static final String FUTURECON = "Is %s from the future?";
+
 	private static final List<ModMetadata> REGISTERED_MODS = new ArrayList<ModMetadata>();
 	private static final Map<String, String> OUTDATED_MODS = new HashMap<String, String>();
 	private static boolean done = false;
@@ -29,7 +40,7 @@ public class VersionChecker {
 		REGISTERED_MODS.add(modMetadata);
 
 		if (modMetadata.description != null) {
-			modMetadata.description += String.format(Strings.VERCHECK_RECOMMENDED_FORGE, forgeVersion);
+			modMetadata.description += String.format(RECOMMENDED_FORGE, forgeVersion);
 		}
 	}
 
@@ -50,7 +61,7 @@ public class VersionChecker {
 			@Override
 			public void run() {
 				try {
-					URL url = new URL(String.format(Strings.VERCHECK_URL, Reference.MINECRAFT));
+					URL url = new URL(String.format(URL, Reference.MINECRAFT));
 					InputStream con = url.openStream();
 					String data = new String(ByteStreams.toByteArray(con));
 					con.close();
@@ -69,19 +80,19 @@ public class VersionChecker {
 								int diff = versionRemote.compareTo(versionLocal);
 
 								if (diff > 0) {
-									if (Reference.config.canNotifyOfUpdate(modid, versionRemote.getVersionString())) {
-										OUTDATED_MODS.put(modMetadata.name, String.format(Strings.VERCHECK_VERSION, versionLocal, versionRemote));
+									if (ConfigurationHandler.canNotifyOfUpdate(modid, versionRemote.getVersionString())) {
+										OUTDATED_MODS.put(modMetadata.name, String.format(VERSION, versionLocal, versionRemote));
 									}
-									modMetadata.description += String.format(Strings.VERCHECK_UPDATEAVAILABLE, versionLocal, versionRemote);
-									Reference.logger.info(String.format(Strings.VERCHECK_UPDATEAVAILABLECON, modid, versionLocal, versionRemote));
+									modMetadata.description += String.format(UPDATEAVAILABLE, versionLocal, versionRemote);
+									Reference.logger.info(String.format(UPDATEAVAILABLECON, modid, versionLocal, versionRemote));
 								} else if (diff == 0) {
-									modMetadata.description += Strings.VERCHECK_UPTODATE;
-									Reference.logger.info(String.format(Strings.VERCHECK_UPTODATECON, modid));
+									modMetadata.description += UPTODATE;
+									Reference.logger.info(String.format(UPTODATECON, modid));
 								} else {
-									Reference.logger.info(String.format(Strings.VERCHECK_FUTURECON, modid));
+									Reference.logger.info(String.format(FUTURECON, modid));
 								}
 
-								Reference.config.addUpdate(modid, versionRemote.getVersionString());
+								ConfigurationHandler.addUpdate(modid, versionRemote.getVersionString());
 							} catch (Exception ignored) {
 							}
 						}

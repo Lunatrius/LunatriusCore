@@ -1,7 +1,5 @@
-package com.github.lunatrius.core.client;
+package com.github.lunatrius.core.version;
 
-import com.github.lunatrius.core.lib.Strings;
-import com.github.lunatrius.core.version.VersionChecker;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
@@ -19,6 +17,8 @@ import java.util.Set;
 import static cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
 
 public class VersionTicker {
+	public static final String UPDATESAVAILABLE = "lunatriuscore.message.updatesavailable";
+
 	@SubscribeEvent
 	public void onTick(ClientTickEvent event) {
 		if (event.phase.equals(TickEvent.Phase.END)) {
@@ -29,7 +29,7 @@ public class VersionTicker {
 				Set<Map.Entry<String, String>> outdatedMods = VersionChecker.getOutdatedMods();
 
 				if (outdatedMods.size() > 0) {
-					minecraft.thePlayer.addChatComponentMessage(new ChatComponentTranslation(Strings.MESSAGE_UPDATESAVAILABLE, getChatComponentModList(outdatedMods)));
+					minecraft.thePlayer.addChatComponentMessage(new ChatComponentTranslation(UPDATESAVAILABLE, getChatComponentModList(outdatedMods)));
 				}
 
 				FMLCommonHandler.instance().bus().unregister(this);
