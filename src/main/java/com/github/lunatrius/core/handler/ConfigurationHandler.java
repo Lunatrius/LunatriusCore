@@ -20,7 +20,7 @@ public class ConfigurationHandler {
 	public static final String SILENCEKNOWNUPDATES_DESC = "Should the mod remind you only for new updates (once per version)?";
 	public static final String KNOWNVERSIONS = "knownVersions";
 	public static final String KNOWNVERSIONS_DESC = "A list of known updates. Deleting versions from the list will remind you about them again.";
-	public static final String LANG_PREFIX = Reference.MODID.toLowerCase();
+	public static final String LANG_PREFIX = Reference.MODID.toLowerCase() + ".config";
 
 	public static Configuration configuration;
 

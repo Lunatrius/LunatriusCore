@@ -1,8 +1,8 @@
-# gui
-# lunatriuscore.checkForUpdates=Check for updates
-# lunatriuscore.checkForUpdates.tooltip=Should the mod check for updates?
-# lunatriuscore.silenceKnownUpdates=Silence known updates
-# lunatriuscore.silenceKnownUpdates.tooltip=Should the mod remind you only for new updates (once per version)?
+# gui - config
+# lunatriuscore.config.checkForUpdates=Check for updates
+# lunatriuscore.config.checkForUpdates.tooltip=Should the mod check for updates?
+# lunatriuscore.config.silenceKnownUpdates=Silence known updates
+# lunatriuscore.config.silenceKnownUpdates.tooltip=Should the mod remind you only for new updates (once per version)?
 
 # messages
 lunatriuscore.message.updatesavailable=Обновления доступны для %s.
