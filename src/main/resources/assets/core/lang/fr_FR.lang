@@ -1,0 +1,8 @@
+# gui - config
+lunatriuscore.config.checkForUpdates=Vérifier si des mises à jour existent
+lunatriuscore.config.checkForUpdates.tooltip=Le mod doit-il verifier si des mises à jour sont disponibles ?
+lunatriuscore.config.silenceKnownUpdates=Masquer les mises à jour déjà connu
+lunatriuscore.config.silenceKnownUpdates.tooltip=Le mod doit-il vous prévenir si la mise à jour est déjà connu ?
+
+# messages
+lunatriuscore.message.updatesavailable=Des mises à jour sont disponible pour %s.
