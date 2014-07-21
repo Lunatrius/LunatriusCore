@@ -89,6 +89,10 @@ public class Vector4f extends Vector3f {
 		return new Vector4i((int) Math.floor(this.x), (int) Math.floor(this.y), (int) Math.floor(this.z), (int) Math.floor(this.w));
 	}
 
+	public Vector4i toVector4i(Vector4i vec) {
+		return vec.set((int) Math.floor(this.x), (int) Math.floor(this.y), (int) Math.floor(this.z), (int) Math.floor(this.w));
+	}
+
 	@Override
 	public Vector4f clone() {
 		return new Vector4f(this);
