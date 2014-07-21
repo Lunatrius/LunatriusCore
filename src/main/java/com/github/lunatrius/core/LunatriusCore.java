@@ -18,10 +18,10 @@ public class LunatriusCore {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		VersionChecker.registerMod(event.getModMetadata());
-
 		Reference.logger = event.getModLog();
 		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
+
+		VersionChecker.registerMod(event.getModMetadata(), Reference.FORGE);
 	}
 
 	@EventHandler
