@@ -24,8 +24,11 @@ public class ConfigurationHandler {
 
 	public static Configuration configuration;
 
-	public static boolean checkForUpdates = true;
-	public static boolean silenceKnownUpdates = false;
+	public static final boolean CHECKFORUPDATES_DEFAULT = true;
+	public static final boolean SILENCEKNOWNUPDATES_DEFAULT = false;
+
+	public static boolean checkForUpdates = CHECKFORUPDATES_DEFAULT;
+	public static boolean silenceKnownUpdates = SILENCEKNOWNUPDATES_DEFAULT;
 
 	private static Property propCheckForUpdates = null;
 	private static Property propSilenceKnownUpdates = null;
@@ -39,15 +42,15 @@ public class ConfigurationHandler {
 	}
 
 	private static void loadConfiguration() {
-		propCheckForUpdates = configuration.get(CATEGORY_VERCHECK, CHECKFORUPDATES, checkForUpdates, CHECKFORUPDATES_DESC);
+		propCheckForUpdates = configuration.get(CATEGORY_VERCHECK, CHECKFORUPDATES, CHECKFORUPDATES_DEFAULT, CHECKFORUPDATES_DESC);
 		propCheckForUpdates.setLanguageKey(String.format("%s.%s", LANG_PREFIX, CHECKFORUPDATES));
 		propCheckForUpdates.setRequiresMcRestart(true);
-		checkForUpdates = propCheckForUpdates.getBoolean(checkForUpdates);
+		checkForUpdates = propCheckForUpdates.getBoolean(CHECKFORUPDATES_DEFAULT);
 
-		propSilenceKnownUpdates = configuration.get(CATEGORY_VERCHECK, SILENCEKNOWNUPDATES, silenceKnownUpdates, SILENCEKNOWNUPDATES_DESC);
+		propSilenceKnownUpdates = configuration.get(CATEGORY_VERCHECK, SILENCEKNOWNUPDATES, SILENCEKNOWNUPDATES_DEFAULT, SILENCEKNOWNUPDATES_DESC);
 		propSilenceKnownUpdates.setLanguageKey(String.format("%s.%s", LANG_PREFIX, SILENCEKNOWNUPDATES));
 		propSilenceKnownUpdates.setRequiresMcRestart(true);
-		silenceKnownUpdates = propSilenceKnownUpdates.getBoolean(silenceKnownUpdates);
+		silenceKnownUpdates = propSilenceKnownUpdates.getBoolean(SILENCEKNOWNUPDATES_DEFAULT);
 
 		propKnownUpdates = configuration.get(CATEGORY_VERCHECK, KNOWNVERSIONS, new String[0], KNOWNVERSIONS_DESC);
 		propKnownUpdates.setShowInGui(false);
