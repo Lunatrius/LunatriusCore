@@ -22,7 +22,8 @@ import java.util.Set;
 
 public class VersionChecker {
 	public static final String RECOMMENDED_FORGE = "\n---\nRecommended Forge: %s";
-	public static final String URL = "http://mc.lunatri.us/json?latest=1&mc=%s";
+	public static final String VERCHECKAPI_URL = "http://mc.lunatri.us/json?latest=1&mc=%s&v=%d";
+	public static final int VERCHECKAPI_VER = 2;
 
 	public static final String VERSION = "%s -> %s";
 	public static final String UPDATEAVAILABLE = "\nUpdate is available (%s -> %s)!";
@@ -69,14 +70,19 @@ public class VersionChecker {
 			@Override
 			public void run() {
 				try {
-					URL url = new URL(String.format(URL, Reference.MINECRAFT));
+					if (Reference.MINECRAFT == null || "null".equals(Reference.MINECRAFT)) {
+						Reference.logger.error("Minecraft version is null! This is a bug!");
+						return;
+					}
+
+					URL url = new URL(String.format(VERCHECKAPI_URL, Reference.MINECRAFT, VERCHECKAPI_VER));
 					InputStream con = url.openStream();
 					String data = new String(ByteStreams.toByteArray(con));
 					con.close();
 
 					Map<String, Object> json = new Gson().fromJson(data, Map.class);
 
-					if (json.get("version").equals(1.0)) {
+					if ((Double) json.get("version") == VERCHECKAPI_VER) {
 						Map<String, Map<String, Map<String, Object>>> mods = (Map<String, Map<String, Map<String, Object>>>) json.get("mods");
 
 						for (ModMetadata modMetadata : REGISTERED_MODS) {
@@ -84,12 +90,25 @@ public class VersionChecker {
 							ArtifactVersion versionLocal = new DefaultArtifactVersion(modMetadata.version);
 
 							try {
-								Map<String, Object> latest = mods.get(modid).get("latest");
+								Map<String, Map<String, Object>> mod = mods.get(modid);
+								if (mod == null) {
+									continue;
+								}
+
+								Map<String, Object> latest = mod.get("latest");
+								if (latest == null) {
+									continue;
+								}
+
 								DefaultArtifactVersion versionRemote = new DefaultArtifactVersion((String) latest.get("version"));
 								int diff = versionRemote.compareTo(versionLocal);
 
 								if (diff > 0) {
 									List<String> changes = (List<String>) latest.get("changes");
+									if (changes == null) {
+										changes = new ArrayList<String>();
+									}
+
 									if (changes.size() == 0) {
 										changes.add("No changelog available.");
 									}
