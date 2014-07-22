@@ -55,6 +55,18 @@ public class Vector2i {
 		return this.x * this.x + this.y * this.y;
 	}
 
+	public final double lengthTo(Vector2i vec) {
+		return Math.sqrt(lengthSquaredTo(vec));
+	}
+
+	public int lengthSquaredTo(Vector2i vec) {
+		return pow2(this.x - vec.x) + pow2(this.y - vec.y);
+	}
+
+	protected final int pow2(int num) {
+		return num * num;
+	}
+
 	public final Vector2i normalize() {
 		double len = length();
 		if (len != 0.0) {

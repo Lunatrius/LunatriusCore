@@ -44,6 +44,14 @@ public class Vector3f extends Vector2f {
 		return this.x * this.x + this.y * this.y + this.z * this.z;
 	}
 
+	public final double lengthTo(Vector3f vec) {
+		return Math.sqrt(lengthSquaredTo(vec));
+	}
+
+	public float lengthSquaredTo(Vector3f vec) {
+		return pow2(this.x - vec.x) + pow2(this.y - vec.y) + pow2(this.z - vec.z);
+	}
+
 	@Override
 	public Vector3f negate() {
 		this.x = -this.x;

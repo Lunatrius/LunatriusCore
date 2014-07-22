@@ -45,6 +45,14 @@ public class Vector4i extends Vector3i {
 		return this.x * this.x + this.y * this.y + this.z * this.z + this.w * this.w;
 	}
 
+	public final double lengthTo(Vector4i vec) {
+		return Math.sqrt(lengthSquaredTo(vec));
+	}
+
+	public int lengthSquaredTo(Vector4i vec) {
+		return pow2(this.x - vec.x) + pow2(this.y - vec.y) + pow2(this.z - vec.z) + pow2(this.w - vec.w);
+	}
+
 	@Override
 	public Vector4i negate() {
 		this.x = -this.x;

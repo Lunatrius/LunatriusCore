@@ -56,6 +56,18 @@ public class Vector2f {
 		return this.x * this.x + this.y * this.y;
 	}
 
+	public final double lengthTo(Vector2f vec) {
+		return Math.sqrt(lengthSquaredTo(vec));
+	}
+
+	public float lengthSquaredTo(Vector2f vec) {
+		return pow2(this.x - vec.x) + pow2(this.y - vec.y);
+	}
+
+	protected final float pow2(float num) {
+		return num * num;
+	}
+
 	public final Vector2f normalize() {
 		double len = length();
 		if (len != 0.0) {
