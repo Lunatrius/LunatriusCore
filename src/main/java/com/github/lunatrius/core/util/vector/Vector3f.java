@@ -33,54 +33,61 @@ public class Vector3f extends Vector2f {
 	}
 
 	public Vector3f set(float x, float y, float z) {
-		super.set(x, y);
+		this.x = x;
+		this.y = y;
 		this.z = z;
 		return this;
 	}
 
 	@Override
 	public float lengthSquared() {
-		return super.lengthSquared() + this.z * this.z;
+		return this.x * this.x + this.y * this.y + this.z * this.z;
 	}
 
 	@Override
 	public Vector3f negate() {
-		super.negate();
+		this.x = -this.x;
+		this.y = -this.y;
 		this.z = -this.z;
 		return this;
 	}
 
 	public double dot(Vector3i vec) {
-		return super.dot(vec) + this.z * vec.z;
+		return this.x * vec.x + this.y * vec.y + this.z * vec.z;
 	}
 
 	@Override
 	public Vector3f scale(double scale) {
-		super.scale(scale);
+		this.x *= scale;
+		this.y *= scale;
 		this.z *= scale;
 		return this;
 	}
 
 	public Vector3f add(Vector3f vec) {
-		super.add(vec);
+		this.x += vec.x;
+		this.y += vec.y;
 		this.z += vec.z;
 		return this;
 	}
 
 	public Vector3f add(float x, float y, float z) {
-		super.add(x, y);
+		this.x += x;
+		this.y += y;
 		this.z += z;
 		return this;
 	}
 
 	public Vector3f sub(Vector3f vec) {
-		super.sub(vec);
+		this.x -= vec.x;
+		this.y -= vec.y;
 		this.z -= vec.z;
 		return this;
 	}
 
 	public Vector3f sub(float x, float y, float z) {
-		super.sub(x, y);
+		this.x -= x;
+		this.y -= y;
 		this.z -= z;
 		return this;
 	}
@@ -108,7 +115,7 @@ public class Vector3f extends Vector2f {
 	}
 
 	public boolean equals(Vector3f vec, float epsilon) {
-		return super.equals(vec) && Math.abs(this.z - vec.z) < epsilon;
+		return Math.abs(this.x - vec.x) < epsilon && Math.abs(this.y - vec.y) < epsilon && Math.abs(this.z - vec.z) < epsilon;
 	}
 
 	@Override

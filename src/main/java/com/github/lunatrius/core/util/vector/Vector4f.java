@@ -33,54 +33,68 @@ public class Vector4f extends Vector3f {
 	}
 
 	public Vector4f set(float x, float y, float z, float w) {
-		super.set(x, y, z);
+		this.x = x;
+		this.y = y;
+		this.z = z;
 		this.w = w;
 		return this;
 	}
 
 	@Override
 	public float lengthSquared() {
-		return super.lengthSquared() + this.w * this.w;
+		return this.x * this.x + this.y * this.y + this.z * this.z + this.w * this.w;
 	}
 
 	@Override
 	public Vector4f negate() {
-		super.negate();
+		this.x = -this.x;
+		this.y = -this.y;
+		this.z = -this.z;
 		this.w = -this.w;
 		return this;
 	}
 
 	public double dot(Vector4i vec) {
-		return super.dot(vec) + this.w * vec.w;
+		return this.x * vec.x + this.y * vec.y + this.z * vec.z + this.w * vec.w;
 	}
 
 	@Override
 	public Vector4f scale(double scale) {
-		super.scale(scale);
+		this.x *= scale;
+		this.y *= scale;
+		this.z *= scale;
 		this.w *= scale;
 		return this;
 	}
 
 	public Vector4f add(Vector4f vec) {
-		super.add(vec);
+		this.x += vec.x;
+		this.y += vec.y;
+		this.z += vec.z;
 		this.w += vec.w;
 		return this;
 	}
 
 	public Vector4f add(float x, float y, float z, float w) {
-		super.add(x, y, z);
+		this.x += x;
+		this.y += y;
+		this.z += z;
 		this.w += w;
 		return this;
 	}
 
 	public Vector4f sub(Vector4f vec) {
-		super.sub(vec);
+		this.x -= vec.x;
+		this.y -= vec.y;
+		this.z -= vec.z;
 		this.w -= vec.w;
 		return this;
 	}
 
 	public Vector4f sub(float x, float y, float z, float w) {
-		super.sub(x, y, z);
+		this.x -= x;
+		this.y -= y;
+		this.z -= z;
 		this.w -= w;
 		return this;
 	}
@@ -108,7 +122,7 @@ public class Vector4f extends Vector3f {
 	}
 
 	public boolean equals(Vector4f vec, float epsilon) {
-		return super.equals(vec) && Math.abs(this.w - vec.w) < epsilon;
+		return Math.abs(this.x - vec.x) < epsilon && Math.abs(this.y - vec.y) < epsilon && Math.abs(this.z - vec.z) < epsilon && Math.abs(this.w - vec.w) < epsilon;
 	}
 
 	@Override

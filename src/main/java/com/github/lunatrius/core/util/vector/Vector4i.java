@@ -33,54 +33,68 @@ public class Vector4i extends Vector3i {
 	}
 
 	public Vector4i set(int x, int y, int z, int w) {
-		super.set(x, y, z);
+		this.x = x;
+		this.y = y;
+		this.z = z;
 		this.w = w;
 		return this;
 	}
 
 	@Override
 	public int lengthSquared() {
-		return super.lengthSquared() + this.w * this.w;
+		return this.x * this.x + this.y * this.y + this.z * this.z + this.w * this.w;
 	}
 
 	@Override
 	public Vector4i negate() {
-		super.negate();
+		this.x = -this.x;
+		this.y = -this.y;
+		this.z = -this.z;
 		this.w = -this.w;
 		return this;
 	}
 
 	public double dot(Vector4i vec) {
-		return super.dot(vec) + this.w * vec.w;
+		return this.x * vec.x + this.y * vec.y + this.z * vec.z + this.w * vec.w;
 	}
 
 	@Override
 	public Vector4i scale(double scale) {
-		super.scale(scale);
+		this.x *= scale;
+		this.y *= scale;
+		this.z *= scale;
 		this.w *= scale;
 		return this;
 	}
 
 	public Vector4i add(Vector4i vec) {
-		super.add(vec);
+		this.x += vec.x;
+		this.y += vec.y;
+		this.z += vec.z;
 		this.w += vec.w;
 		return this;
 	}
 
 	public Vector4i add(int x, int y, int z, int w) {
-		super.add(x, y, z);
+		this.x += x;
+		this.y += y;
+		this.z += z;
 		this.w += w;
 		return this;
 	}
 
 	public Vector4i sub(Vector4i vec) {
-		super.sub(vec);
+		this.x -= vec.x;
+		this.y -= vec.y;
+		this.z -= vec.z;
 		this.w -= vec.w;
 		return this;
 	}
 
 	public Vector4i sub(int x, int y, int z, int w) {
-		super.sub(x, y, z);
+		this.x -= x;
+		this.y -= y;
+		this.z -= z;
 		this.w -= w;
 		return this;
 	}
@@ -104,7 +118,7 @@ public class Vector4i extends Vector3i {
 	}
 
 	public boolean equals(Vector4i vec) {
-		return super.equals(vec) && this.w == vec.w;
+		return this.x == vec.x && this.y == vec.y && this.z == vec.z && this.w == vec.w;
 	}
 
 	@Override
