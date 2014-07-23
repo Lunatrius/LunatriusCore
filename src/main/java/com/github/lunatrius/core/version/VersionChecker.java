@@ -1,7 +1,7 @@
 package com.github.lunatrius.core.version;
 
 import com.github.lunatrius.core.handler.ConfigurationHandler;
-import com.github.lunatrius.core.lib.Reference;
+import com.github.lunatrius.core.reference.Reference;
 import com.google.common.base.Joiner;
 import com.google.common.io.ByteStreams;
 import com.google.gson.Gson;

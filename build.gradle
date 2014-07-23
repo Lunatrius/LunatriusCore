@@ -46,6 +46,11 @@ minecraft {
         runDir = 'run'
     else
         runDir = run_location.replace('{modid}', project.name).replace('{mcversion}', config.version.minecraft)
+
+    replaceIn 'reference/Reference.java'
+    replace '${version}', modversion
+    replace '${mcversion}', config.version.minecraft
+    replace '${forgeversion}', config.version.forge
 }
 
 jar {
@@ -60,7 +65,6 @@ processResources {
 
     from (sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
-        include 'version.properties'
 
         expand (['modid': project.name,
             'version': modversion,
@@ -72,7 +76,6 @@ processResources {
 
     from (sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
-        exclude 'version.properties'
     }
 }
 
