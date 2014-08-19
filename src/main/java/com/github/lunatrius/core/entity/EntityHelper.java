@@ -8,19 +8,20 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class EntityHelper {
+	public final static int WILDMARK = -1;
+
 	public static int getItemCountInInventory(IInventory inventory, Item item) {
-		return getItemCountInInventory(inventory, item, -1);
+		return getItemCountInInventory(inventory, item, WILDMARK);
 	}
 
 	public static int getItemCountInInventory(IInventory inventory, Item item, int itemDamage) {
-		int inventorySize = inventory.getSizeInventory();
+		final int inventorySize = inventory.getSizeInventory();
 		int count = 0;
-		ItemStack itemStack;
 
 		for (int slot = 0; slot < inventorySize; slot++) {
-			itemStack = inventory.getStackInSlot(slot);
+			final ItemStack itemStack = inventory.getStackInSlot(slot);
 
-			if (itemStack != null && itemStack.getItem() == item && (itemDamage == -1 || itemDamage == itemStack.getItemDamage())) {
+			if (itemStack != null && itemStack.getItem() == item && (itemDamage == WILDMARK || itemDamage == itemStack.getItemDamage())) {
 				count += itemStack.stackSize;
 			}
 		}
