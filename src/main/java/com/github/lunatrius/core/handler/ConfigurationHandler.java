@@ -1,5 +1,6 @@
 package com.github.lunatrius.core.handler;
 
+import com.github.lunatrius.core.reference.Names;
 import com.github.lunatrius.core.reference.Reference;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -13,15 +14,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class ConfigurationHandler {
-	public static final String CATEGORY_VERCHECK = "versioncheck";
-	public static final String CHECKFORUPDATES = "checkForUpdates";
-	public static final String CHECKFORUPDATES_DESC = "Should the mod check for updates?";
-	public static final String SILENCEKNOWNUPDATES = "silenceKnownUpdates";
-	public static final String SILENCEKNOWNUPDATES_DESC = "Should the mod remind you only for new updates (once per version)?";
-	public static final String KNOWNVERSIONS = "knownVersions";
-	public static final String KNOWNVERSIONS_DESC = "A list of known updates. Deleting versions from the list will remind you about them again.";
-	public static final String LANG_PREFIX = Reference.MODID.toLowerCase() + ".config";
-
 	public static Configuration configuration;
 
 	public static final boolean CHECKFORUPDATES_DEFAULT = true;
@@ -42,17 +34,17 @@ public class ConfigurationHandler {
 	}
 
 	private static void loadConfiguration() {
-		propCheckForUpdates = configuration.get(CATEGORY_VERCHECK, CHECKFORUPDATES, CHECKFORUPDATES_DEFAULT, CHECKFORUPDATES_DESC);
-		propCheckForUpdates.setLanguageKey(String.format("%s.%s", LANG_PREFIX, CHECKFORUPDATES));
+		propCheckForUpdates = configuration.get(Names.Config.Category.VERSIONCHECK, Names.Config.CHECK_FOR_UPDATES, CHECKFORUPDATES_DEFAULT, Names.Config.CHECK_FOR_UPDATES_DESC);
+		propCheckForUpdates.setLanguageKey(Names.Config.LANG_PREFIX + "." + Names.Config.CHECK_FOR_UPDATES);
 		propCheckForUpdates.setRequiresMcRestart(true);
 		checkForUpdates = propCheckForUpdates.getBoolean(CHECKFORUPDATES_DEFAULT);
 
-		propSilenceKnownUpdates = configuration.get(CATEGORY_VERCHECK, SILENCEKNOWNUPDATES, SILENCEKNOWNUPDATES_DEFAULT, SILENCEKNOWNUPDATES_DESC);
-		propSilenceKnownUpdates.setLanguageKey(String.format("%s.%s", LANG_PREFIX, SILENCEKNOWNUPDATES));
+		propSilenceKnownUpdates = configuration.get(Names.Config.Category.VERSIONCHECK, Names.Config.SILENCE_KNOWN_UPDATES, SILENCEKNOWNUPDATES_DEFAULT, Names.Config.SILENCE_KNOWN_UPDATES_DESC);
+		propSilenceKnownUpdates.setLanguageKey(Names.Config.LANG_PREFIX + "." + Names.Config.SILENCE_KNOWN_UPDATES);
 		propSilenceKnownUpdates.setRequiresMcRestart(true);
 		silenceKnownUpdates = propSilenceKnownUpdates.getBoolean(SILENCEKNOWNUPDATES_DEFAULT);
 
-		propKnownUpdates = configuration.get(CATEGORY_VERCHECK, KNOWNVERSIONS, new String[0], KNOWNVERSIONS_DESC);
+		propKnownUpdates = configuration.get(Names.Config.Category.VERSIONCHECK, Names.Config.KNOWN_VERSIONS, new String[0], Names.Config.KNOWN_VERSIONS_DESC);
 		propKnownUpdates.setShowInGui(false);
 
 		if (configuration.hasChanged()) {
