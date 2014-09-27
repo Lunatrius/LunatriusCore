@@ -13,27 +13,27 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION, guiFactory = Reference.GUI_FACTORY)
 public class LunatriusCore {
-	@SidedProxy(serverSide = Reference.PROXY_SERVER, clientSide = Reference.PROXY_CLIENT)
-	public static CommonProxy proxy;
+    @SidedProxy(serverSide = Reference.PROXY_SERVER, clientSide = Reference.PROXY_CLIENT)
+    public static CommonProxy proxy;
 
-	@EventHandler
-	public void preInit(FMLPreInitializationEvent event) {
-		Reference.logger = event.getModLog();
-		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
+    @EventHandler
+    public void preInit(FMLPreInitializationEvent event) {
+        Reference.logger = event.getModLog();
+        ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 
-		VersionChecker.registerMod(event.getModMetadata(), Reference.FORGE);
-	}
+        VersionChecker.registerMod(event.getModMetadata(), Reference.FORGE);
+    }
 
-	@EventHandler
-	public void init(FMLInitializationEvent event) {
-		if (ConfigurationHandler.checkForUpdates) {
-			VersionChecker.startVersionCheck();
-		}
+    @EventHandler
+    public void init(FMLInitializationEvent event) {
+        if (ConfigurationHandler.checkForUpdates) {
+            VersionChecker.startVersionCheck();
+        }
 
-		proxy.registerTickers();
-	}
+        proxy.registerTickers();
+    }
 
-	@EventHandler
-	public void postInit(FMLPostInitializationEvent event) {
-	}
+    @EventHandler
+    public void postInit(FMLPostInitializationEvent event) {
+    }
 }

@@ -17,47 +17,47 @@ import java.util.Set;
 import static cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
 
 public class VersionTicker {
-	public static final String UPDATESAVAILABLE = "lunatriuscore.message.updatesavailable";
+    public static final String UPDATESAVAILABLE = "lunatriuscore.message.updatesavailable";
 
-	@SubscribeEvent
-	public void onTick(ClientTickEvent event) {
-		if (event.phase.equals(TickEvent.Phase.END)) {
-			Minecraft minecraft = Minecraft.getMinecraft();
-			boolean keepTicking = minecraft == null || minecraft.thePlayer == null || minecraft.theWorld == null;
+    @SubscribeEvent
+    public void onTick(ClientTickEvent event) {
+        if (event.phase.equals(TickEvent.Phase.END)) {
+            Minecraft minecraft = Minecraft.getMinecraft();
+            boolean keepTicking = minecraft == null || minecraft.thePlayer == null || minecraft.theWorld == null;
 
-			if (!keepTicking && VersionChecker.isDone()) {
-				Set<Map.Entry<String, String>> outdatedMods = VersionChecker.getOutdatedMods();
+            if (!keepTicking && VersionChecker.isDone()) {
+                Set<Map.Entry<String, String>> outdatedMods = VersionChecker.getOutdatedMods();
 
-				if (outdatedMods.size() > 0) {
-					minecraft.thePlayer.addChatComponentMessage(new ChatComponentTranslation(UPDATESAVAILABLE, getChatComponentModList(outdatedMods)));
-				}
+                if (outdatedMods.size() > 0) {
+                    minecraft.thePlayer.addChatComponentMessage(new ChatComponentTranslation(UPDATESAVAILABLE, getChatComponentModList(outdatedMods)));
+                }
 
-				FMLCommonHandler.instance().bus().unregister(this);
-			}
-		}
-	}
+                FMLCommonHandler.instance().bus().unregister(this);
+            }
+        }
+    }
 
-	private IChatComponent getChatComponentModList(Set<Map.Entry<String, String>> mods) {
-		IChatComponent chatComponentModList = new ChatComponentText("[");
+    private IChatComponent getChatComponentModList(Set<Map.Entry<String, String>> mods) {
+        IChatComponent chatComponentModList = new ChatComponentText("[");
 
-		for (Map.Entry<String, String> mod : mods) {
-			if (chatComponentModList.getSiblings().size() > 0) {
-				chatComponentModList.appendText(", ");
-			}
+        for (Map.Entry<String, String> mod : mods) {
+            if (chatComponentModList.getSiblings().size() > 0) {
+                chatComponentModList.appendText(", ");
+            }
 
-			IChatComponent chatComponentMod = new ChatComponentText(mod.getKey());
-			ChatStyle chatStyle = chatComponentMod.getChatStyle();
+            IChatComponent chatComponentMod = new ChatComponentText(mod.getKey());
+            ChatStyle chatStyle = chatComponentMod.getChatStyle();
 
-			chatStyle.setColor(EnumChatFormatting.GRAY);
-			chatStyle.setChatHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, getChatComponentHover(mod.getKey(), mod.getValue())));
+            chatStyle.setColor(EnumChatFormatting.GRAY);
+            chatStyle.setChatHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, getChatComponentHover(mod.getKey(), mod.getValue())));
 
-			chatComponentModList.appendSibling(chatComponentMod);
-		}
+            chatComponentModList.appendSibling(chatComponentMod);
+        }
 
-		return chatComponentModList.appendText("]");
-	}
+        return chatComponentModList.appendText("]");
+    }
 
-	private IChatComponent getChatComponentHover(String name, String version) {
-		return new ChatComponentText(String.format("%s%s%s: %s", EnumChatFormatting.GREEN, name, EnumChatFormatting.RESET, version));
-	}
+    private IChatComponent getChatComponentHover(String name, String version) {
+        return new ChatComponentText(String.format("%s%s%s: %s", EnumChatFormatting.GREEN, name, EnumChatFormatting.RESET, version));
+    }
 }
