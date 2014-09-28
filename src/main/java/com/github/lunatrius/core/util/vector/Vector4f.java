@@ -62,7 +62,7 @@ public class Vector4f extends Vector3f {
         return this;
     }
 
-    public double dot(Vector4i vec) {
+    public float dot(Vector4f vec) {
         return this.x * vec.x + this.y * vec.y + this.z * vec.z + this.w * vec.w;
     }
 

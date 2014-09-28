@@ -83,7 +83,7 @@ public class Vector2f {
         return this;
     }
 
-    public double dot(Vector2i vec) {
+    public float dot(Vector2f vec) {
         return this.x * vec.x + this.y * vec.y;
     }
 
