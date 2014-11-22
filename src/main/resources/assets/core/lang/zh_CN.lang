@@ -1,8 +1,8 @@
 # gui - config
 lunatriuscore.config.checkForUpdates=检测版本更新
-lunatriuscore.config.checkForUpdates.tooltip=是否允许该Mod检测版本更新?
-lunatriuscore.config.silenceKnownUpdates=已知更新沉默
-lunatriuscore.config.silenceKnownUpdates.tooltip=是否允许该Mod只提醒新的版本更新(每个版本只提醒一次)?
+lunatriuscore.config.checkForUpdates.tooltip=是否让该Mod检测版本更新?
+lunatriuscore.config.silenceKnownUpdates静默更新已知的新版本
+lunatriuscore.config.silenceKnownUpdates.tooltip=是否让该Mod只提醒你新版本的更新(每个版本只提醒一次)?
 
 # messages
-lunatriuscore.message.updatesavailable=检测到%s有新的版本更新.
+lunatriuscore.message.updatesavailable=有新的%s更新可用.
