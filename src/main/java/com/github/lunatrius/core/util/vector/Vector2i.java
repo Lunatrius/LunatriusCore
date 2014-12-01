@@ -124,6 +124,14 @@ public class Vector2i {
         return vec.set(this.x, this.y);
     }
 
+    public Vector2d toVector2d() {
+        return new Vector2d(this.x, this.y);
+    }
+
+    public Vector2d toVector2d(Vector2d vec) {
+        return vec.set(this.x, this.y);
+    }
+
     @Override
     public Vector2i clone() {
         return new Vector2i(this);

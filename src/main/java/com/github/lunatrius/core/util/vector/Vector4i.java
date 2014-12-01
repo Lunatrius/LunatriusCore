@@ -115,6 +115,14 @@ public class Vector4i extends Vector3i {
         return vec.set(this.x, this.y, this.z, this.w);
     }
 
+    public Vector4d toVector4d() {
+        return new Vector4d(this.x, this.y, this.z, this.w);
+    }
+
+    public Vector4d toVector4d(Vector4d vec) {
+        return vec.set(this.x, this.y, this.z, this.w);
+    }
+
     @Override
     public Vector4i clone() {
         return new Vector4i(this);
