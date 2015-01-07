@@ -82,7 +82,7 @@ public class GuiNumericField extends GuiButton {
         String text = this.guiTextField.getText();
         int cursorPositionNew = this.guiTextField.getCursorPosition();
 
-        if (text.length() == 0) {
+        if (text.length() == 0 || text.equals("-")) {
             return true;
         }
 
@@ -125,6 +125,13 @@ public class GuiNumericField extends GuiButton {
         return this.guiTextField.isFocused();
     }
 
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+        this.guiTextField.setEnabled(enabled);
+        this.guiButtonInc.enabled = enabled;
+        this.guiButtonDec.enabled = enabled;
+    }
+
     public void setMinimum(int minimum) {
         this.minimum = minimum;
     }
@@ -152,7 +159,7 @@ public class GuiNumericField extends GuiButton {
 
     public int getValue() {
         final String text = this.guiTextField.getText();
-        if (text.length() == 0) {
+        if (text.length() == 0 || text.equals("-")) {
             return DEFAULT_VALUE;
         }
         return Integer.parseInt(text);
