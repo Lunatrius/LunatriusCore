@@ -28,7 +28,7 @@ public class GuiNumericField extends GuiButton {
 
     public GuiNumericField(FontRenderer fontRenderer, int id, int x, int y, int width, int height) {
         super(id, 0, 0, 0, 0, "");
-        this.guiTextField = new GuiTextField(fontRenderer, x, y + 1, width - BUTTON_WIDTH * 2 - 1, height - 2);
+        this.guiTextField = new GuiTextField(fontRenderer, x + 1, y + 1, width - BUTTON_WIDTH * 2 - 2, height - 2);
         this.guiButtonDec = new GuiButton(0, x + width - BUTTON_WIDTH * 2, y, BUTTON_WIDTH, height, "-");
         this.guiButtonInc = new GuiButton(1, x + width - BUTTON_WIDTH * 1, y, BUTTON_WIDTH, height, "+");
 
@@ -83,7 +83,7 @@ public class GuiNumericField extends GuiButton {
         int cursorPositionNew = this.guiTextField.getCursorPosition();
 
         if (text.length() == 0) {
-            text = String.valueOf(DEFAULT_VALUE);
+            return true;
         }
 
         try {
@@ -121,6 +121,10 @@ public class GuiNumericField extends GuiButton {
         this.guiTextField.updateCursorCounter();
     }
 
+    public boolean isFocused() {
+        return this.guiTextField.isFocused();
+    }
+
     public void setMinimum(int minimum) {
         this.minimum = minimum;
     }
@@ -147,6 +151,10 @@ public class GuiNumericField extends GuiButton {
     }
 
     public int getValue() {
-        return Integer.parseInt(this.guiTextField.getText());
+        final String text = this.guiTextField.getText();
+        if (text.length() == 0) {
+            return DEFAULT_VALUE;
+        }
+        return Integer.parseInt(text);
     }
 }
