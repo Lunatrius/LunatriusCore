@@ -22,7 +22,6 @@ group = 'com.github.lunatrius'
 version = "${project.version_minecraft}-${modversion}"
 
 apply from: 'gradle/scripts/forge.gradle'
-apply from: 'gradle/scripts/dependencies.gradle'
 apply from: 'gradle/scripts/artifacts.gradle'
 apply from: 'gradle/scripts/signing.gradle'
 apply from: 'gradle/scripts/release.gradle'
