@@ -28,9 +28,9 @@ public class GuiNumericField extends GuiButton {
 
     public GuiNumericField(FontRenderer fontRenderer, int id, int x, int y, int width, int height) {
         super(id, 0, 0, 0, 0, "");
-        this.guiTextField = new GuiTextField(fontRenderer, x + 1, y + 1, width - BUTTON_WIDTH * 2 - 2, height - 2);
-        this.guiButtonDec = new GuiButton(0, x + width - BUTTON_WIDTH * 2, y, BUTTON_WIDTH, height, "-");
-        this.guiButtonInc = new GuiButton(1, x + width - BUTTON_WIDTH * 1, y, BUTTON_WIDTH, height, "+");
+        this.guiTextField = new GuiTextField(0, fontRenderer, x + 1, y + 1, width - BUTTON_WIDTH * 2 - 2, height - 2);
+        this.guiButtonDec = new GuiButton(1, x + width - BUTTON_WIDTH * 2, y, BUTTON_WIDTH, height, "-");
+        this.guiButtonInc = new GuiButton(2, x + width - BUTTON_WIDTH * 1, y, BUTTON_WIDTH, height, "+");
 
         setValue(DEFAULT_VALUE);
     }

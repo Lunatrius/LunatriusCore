@@ -1,8 +1,5 @@
 package com.github.lunatrius.core.version;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.event.HoverEvent;
 import net.minecraft.util.ChatComponentText;
@@ -10,17 +7,18 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IChatComponent;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.Map;
 import java.util.Set;
-
-import static cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
 
 public class VersionTicker {
     public static final String UPDATESAVAILABLE = "lunatriuscore.message.updatesavailable";
 
     @SubscribeEvent
-    public void onTick(ClientTickEvent event) {
+    public void onTick(TickEvent.ClientTickEvent event) {
         if (event.phase.equals(TickEvent.Phase.END)) {
             Minecraft minecraft = Minecraft.getMinecraft();
             boolean keepTicking = minecraft == null || minecraft.thePlayer == null || minecraft.theWorld == null;

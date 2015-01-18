@@ -4,14 +4,13 @@ import com.github.lunatrius.core.handler.ConfigurationHandler;
 import com.github.lunatrius.core.proxy.CommonProxy;
 import com.github.lunatrius.core.reference.Reference;
 import com.github.lunatrius.core.version.VersionChecker;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkCheckHandler;
-import cpw.mods.fml.relauncher.Side;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkCheckHandler;
+import net.minecraftforge.fml.relauncher.Side;
 
 import java.util.Map;
 
@@ -25,7 +24,7 @@ public class LunatriusCore {
         return true;
     }
 
-    @EventHandler
+    @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         Reference.logger = event.getModLog();
         ConfigurationHandler.init(event.getSuggestedConfigurationFile());
@@ -33,7 +32,7 @@ public class LunatriusCore {
         VersionChecker.registerMod(event.getModMetadata(), Reference.FORGE);
     }
 
-    @EventHandler
+    @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         if (ConfigurationHandler.checkForUpdates) {
             VersionChecker.startVersionCheck();
@@ -42,7 +41,7 @@ public class LunatriusCore {
         proxy.registerTickers();
     }
 
-    @EventHandler
+    @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
     }
 }

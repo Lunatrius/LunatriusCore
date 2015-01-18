@@ -5,6 +5,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import org.lwjgl.input.Keyboard;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class GuiScreenBase extends GuiScreen {
     }
 
     @Override
-    protected void mouseClicked(int mouseX, int mouseY, int mouseEvent) {
+    protected void mouseClicked(int mouseX, int mouseY, int mouseEvent) throws IOException {
         for (GuiButton button : this.buttonList) {
             if (button instanceof GuiNumericField) {
                 GuiNumericField numericField = (GuiNumericField) button;
@@ -45,7 +46,7 @@ public class GuiScreenBase extends GuiScreen {
     }
 
     @Override
-    protected void keyTyped(char character, int code) {
+    protected void keyTyped(char character, int code) throws IOException {
         if (code == Keyboard.KEY_ESCAPE) {
             this.mc.displayGuiScreen(this.parentScreen);
             return;

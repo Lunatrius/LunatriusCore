@@ -5,6 +5,9 @@ compileJava.options.encoding = 'UTF-8'
 minecraft {
     version = "${project.version_minecraft}-${project.version_forge}"
 
+    if (project.hasProperty('version_mappings'))
+        mappings = project.version_mappings
+
     if (!project.hasProperty('run_location'))
         runDir = 'run'
     else
