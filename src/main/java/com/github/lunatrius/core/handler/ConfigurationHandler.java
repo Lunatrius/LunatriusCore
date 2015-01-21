@@ -16,15 +16,18 @@ import java.util.List;
 public class ConfigurationHandler {
     public static Configuration configuration;
 
-    public static final boolean CHECKFORUPDATES_DEFAULT = true;
-    public static final boolean SILENCEKNOWNUPDATES_DEFAULT = false;
+    public static final boolean CHECK_FOR_UPDATES_DEFAULT = true;
+    public static final boolean SILENCE_KNOWN_UPDATES_DEFAULT = false;
+    public static final boolean REPLACE_IN_GAME_CONFIG_DEFAULT = true;
 
-    public static boolean checkForUpdates = CHECKFORUPDATES_DEFAULT;
-    public static boolean silenceKnownUpdates = SILENCEKNOWNUPDATES_DEFAULT;
+    public static boolean checkForUpdates = CHECK_FOR_UPDATES_DEFAULT;
+    public static boolean silenceKnownUpdates = SILENCE_KNOWN_UPDATES_DEFAULT;
+    public static boolean replaceInGameConfig = REPLACE_IN_GAME_CONFIG_DEFAULT;
 
     private static Property propCheckForUpdates = null;
     private static Property propSilenceKnownUpdates = null;
     private static Property propKnownUpdates = null;
+    private static Property propReplaceInGameConfig = null;
 
     public static void init(File configFile) {
         if (configuration == null) {
@@ -34,18 +37,22 @@ public class ConfigurationHandler {
     }
 
     private static void loadConfiguration() {
-        propCheckForUpdates = configuration.get(Names.Config.Category.VERSIONCHECK, Names.Config.CHECK_FOR_UPDATES, CHECKFORUPDATES_DEFAULT, Names.Config.CHECK_FOR_UPDATES_DESC);
+        propCheckForUpdates = configuration.get(Names.Config.Category.VERSION_CHECK, Names.Config.CHECK_FOR_UPDATES, CHECK_FOR_UPDATES_DEFAULT, Names.Config.CHECK_FOR_UPDATES_DESC);
         propCheckForUpdates.setLanguageKey(Names.Config.LANG_PREFIX + "." + Names.Config.CHECK_FOR_UPDATES);
         propCheckForUpdates.setRequiresMcRestart(true);
-        checkForUpdates = propCheckForUpdates.getBoolean(CHECKFORUPDATES_DEFAULT);
+        checkForUpdates = propCheckForUpdates.getBoolean(CHECK_FOR_UPDATES_DEFAULT);
 
-        propSilenceKnownUpdates = configuration.get(Names.Config.Category.VERSIONCHECK, Names.Config.SILENCE_KNOWN_UPDATES, SILENCEKNOWNUPDATES_DEFAULT, Names.Config.SILENCE_KNOWN_UPDATES_DESC);
+        propSilenceKnownUpdates = configuration.get(Names.Config.Category.VERSION_CHECK, Names.Config.SILENCE_KNOWN_UPDATES, SILENCE_KNOWN_UPDATES_DEFAULT, Names.Config.SILENCE_KNOWN_UPDATES_DESC);
         propSilenceKnownUpdates.setLanguageKey(Names.Config.LANG_PREFIX + "." + Names.Config.SILENCE_KNOWN_UPDATES);
         propSilenceKnownUpdates.setRequiresMcRestart(true);
-        silenceKnownUpdates = propSilenceKnownUpdates.getBoolean(SILENCEKNOWNUPDATES_DEFAULT);
+        silenceKnownUpdates = propSilenceKnownUpdates.getBoolean(SILENCE_KNOWN_UPDATES_DEFAULT);
 
-        propKnownUpdates = configuration.get(Names.Config.Category.VERSIONCHECK, Names.Config.KNOWN_VERSIONS, new String[0], Names.Config.KNOWN_VERSIONS_DESC);
+        propKnownUpdates = configuration.get(Names.Config.Category.VERSION_CHECK, Names.Config.KNOWN_VERSIONS, new String[0], Names.Config.KNOWN_VERSIONS_DESC);
         propKnownUpdates.setShowInGui(false);
+
+        propReplaceInGameConfig = configuration.get(Names.Config.Category.TWEAKS, Names.Config.REPLACE_IN_GAME_CONFIG, REPLACE_IN_GAME_CONFIG_DEFAULT, Names.Config.REPLACE_IN_GAME_CONFIG_DESC);
+        propReplaceInGameConfig.setLanguageKey(Names.Config.LANG_PREFIX + "." + Names.Config.REPLACE_IN_GAME_CONFIG);
+        replaceInGameConfig = propReplaceInGameConfig.getBoolean(REPLACE_IN_GAME_CONFIG_DEFAULT);
 
         if (configuration.hasChanged()) {
             configuration.save();
