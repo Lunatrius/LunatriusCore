@@ -1,4 +1,16 @@
-# gui - config
+# gui - categories
+lunatriuscore.config.category.versioncheck=Version überprüfen
+lunatriuscore.config.category.tweaks=Tweaks
+
+# gui - config - update checker
+lunatriuscore.config.checkForUpdates=Nach Updates suchen
+lunatriuscore.config.checkForUpdates.tooltip=Soll die Mod auf Updates überprüfen?
+lunatriuscore.config.silenceKnownUpdates=verberge bekannte Updates
+lunatriuscore.config.silenceKnownUpdates.tooltip=Sollte die Mod an Updates erinnern, nur neuere Versionen (einmalig pro Version)?
+
+# gui - config - tweaks
+lunatriuscore.config.replaceInGameConfig=Ersetze Config GUI
+lunatriuscore.config.replaceInGameConfig.tooltip=Ersetzt Sie die FML Test GUI mit einer funktionierenden GUI.
 
 # messages
 lunatriuscore.message.updatesavailable=Es sind Updates verfügbar für %s.
