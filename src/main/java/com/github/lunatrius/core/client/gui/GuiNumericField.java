@@ -27,7 +27,7 @@ public class GuiNumericField extends GuiButton {
     }
 
     public GuiNumericField(FontRenderer fontRenderer, int id, int x, int y, int width, int height) {
-        super(id, 0, 0, 0, 0, "");
+        super(id, 0, 0, width, height, "");
         this.guiTextField = new GuiTextField(0, fontRenderer, x + 1, y + 1, width - BUTTON_WIDTH * 2 - 2, height - 2);
         this.guiButtonDec = new GuiButton(1, x + width - BUTTON_WIDTH * 2, y, BUTTON_WIDTH, height, "-");
         this.guiButtonInc = new GuiButton(2, x + width - BUTTON_WIDTH * 1, y, BUTTON_WIDTH, height, "+");
@@ -123,6 +123,15 @@ public class GuiNumericField extends GuiButton {
 
     public boolean isFocused() {
         return this.guiTextField.isFocused();
+    }
+
+    public void setPosition(int x, int y) {
+        this.guiTextField.xPosition = x + 1;
+        this.guiTextField.yPosition = y + 1;
+        this.guiButtonInc.xPosition = x + width - BUTTON_WIDTH * 2;
+        this.guiButtonInc.yPosition = y;
+        this.guiButtonDec.xPosition = x + width - BUTTON_WIDTH * 1;
+        this.guiButtonDec.yPosition = y;
     }
 
     public void setEnabled(boolean enabled) {

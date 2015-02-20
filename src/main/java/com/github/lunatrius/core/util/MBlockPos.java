@@ -1,11 +1,14 @@
 package com.github.lunatrius.core.util;
 
+import com.google.common.collect.AbstractIterator;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.util.Vec3i;
+
+import java.util.Iterator;
 
 public class MBlockPos extends BlockPos {
     public int x;
@@ -195,5 +198,48 @@ public class MBlockPos extends BlockPos {
     @Override
     public int getZ() {
         return this.z;
+    }
+
+    public static Iterable<MBlockPos> getAllInBox(BlockPos from, BlockPos to) {
+        final BlockPos start = new BlockPos(Math.min(from.getX(), to.getX()), Math.min(from.getY(), to.getY()), Math.min(from.getZ(), to.getZ()));
+        final BlockPos end = new BlockPos(Math.max(from.getX(), to.getX()), Math.max(from.getY(), to.getY()), Math.max(from.getZ(), to.getZ()));
+        return new Iterable<MBlockPos>() {
+            @Override
+            public Iterator<MBlockPos> iterator() {
+                return new AbstractIterator<MBlockPos>() {
+                    private MBlockPos pos = null;
+
+                    @Override
+                    protected MBlockPos computeNext() {
+                        if (this.pos == null) {
+                            this.pos = new MBlockPos(start.getX(), start.getY(), start.getZ());
+                            return this.pos;
+                        } else if (this.pos.equals(end)) {
+                            return endOfData();
+                        } else {
+                            int x = this.pos.x;
+                            int y = this.pos.y;
+                            int z = this.pos.z;
+
+                            if (x < end.getX()) {
+                                x++;
+                            } else if (y < end.getY()) {
+                                x = start.getX();
+                                y++;
+                            } else if (z < end.getZ()) {
+                                x = start.getX();
+                                y = start.getY();
+                                z++;
+                            }
+
+                            this.pos.x = x;
+                            this.pos.y = y;
+                            this.pos.z = z;
+                            return this.pos;
+                        }
+                    }
+                };
+            }
+        };
     }
 }
