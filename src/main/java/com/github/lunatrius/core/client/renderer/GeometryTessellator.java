@@ -10,7 +10,7 @@ public class GeometryTessellator extends Tessellator {
     private static GeometryTessellator instance = null;
 
     private int mode = -1;
-    private double delta = 0;
+    private static double delta = 0;
 
     public GeometryTessellator() {
         this(0x200000);
@@ -52,15 +52,15 @@ public class GeometryTessellator extends Tessellator {
         return super.draw();
     }
 
-    public void setDelta(final double delta) {
-        this.delta = delta;
+    public static void setDelta(final double delta) {
+        GeometryTessellator.delta = delta;
     }
 
     public void drawCuboid(final BlockPos pos, final int sides, final int color) {
         drawCuboid(pos, sides, color, color >>> 24);
     }
 
-    public void drawCuboid(final BlockPos pos, final int sides, final int rgb, int alpha) {
+    public void drawCuboid(final BlockPos pos, final int sides, final int rgb, final int alpha) {
         drawCuboid(pos, pos, sides, rgb, alpha);
     }
 
@@ -73,24 +73,44 @@ public class GeometryTessellator extends Tessellator {
             return;
         }
 
-        final double x0 = begin.getX() - this.delta;
-        final double y0 = begin.getY() - this.delta;
-        final double z0 = begin.getZ() - this.delta;
-        final double x1 = end.getX() + 1 + this.delta;
-        final double y1 = end.getY() + 1 + this.delta;
-        final double z1 = end.getZ() + 1 + this.delta;
+        final double x0 = begin.getX() - delta;
+        final double y0 = begin.getY() - delta;
+        final double z0 = begin.getZ() - delta;
+        final double x1 = end.getX() + 1 + delta;
+        final double y1 = end.getY() + 1 + delta;
+        final double z1 = end.getZ() + 1 + delta;
 
         if (this.mode == GL11.GL_QUADS) {
-            drawQuads(x0, y0, z0, x1, y1, z1, sides, rgb, a);
+            drawQuads(getWorldRenderer(), x0, y0, z0, x1, y1, z1, sides, rgb, a);
         } else if (this.mode == GL11.GL_LINES) {
-            drawLines(x0, y0, z0, x1, y1, z1, sides, rgb, a);
+            drawLines(getWorldRenderer(), x0, y0, z0, x1, y1, z1, sides, rgb, a);
         } else {
             throw new IllegalStateException("Unsupported mode!");
         }
     }
 
-    private void drawQuads(final double x0, final double y0, final double z0, final double x1, final double y1, final double z1, final int sides, final int rgb, int a) {
-        final WorldRenderer worldRenderer = getWorldRenderer();
+    public static void drawCuboid(final WorldRenderer worldRenderer, int mode, final BlockPos pos, final int sides, final int rgb, final int a) {
+        drawCuboid(worldRenderer, mode, pos, pos, sides, rgb, a);
+    }
+
+    public static void drawCuboid(final WorldRenderer worldRenderer, int mode, final BlockPos begin, final BlockPos end, final int sides, final int rgb, final int a) {
+        final double x0 = begin.getX() - delta;
+        final double y0 = begin.getY() - delta;
+        final double z0 = begin.getZ() - delta;
+        final double x1 = end.getX() + 1 + delta;
+        final double y1 = end.getY() + 1 + delta;
+        final double z1 = end.getZ() + 1 + delta;
+
+        if (mode == GL11.GL_QUADS) {
+            drawQuads(worldRenderer, x0, y0, z0, x1, y1, z1, sides, rgb, a);
+        } else if (mode == GL11.GL_LINES) {
+            drawLines(worldRenderer, x0, y0, z0, x1, y1, z1, sides, rgb, a);
+        } else {
+            throw new IllegalStateException("Unsupported mode!");
+        }
+    }
+
+    public static void drawQuads(final WorldRenderer worldRenderer, final double x0, final double y0, final double z0, final double x1, final double y1, final double z1, final int sides, final int rgb, final int a) {
         worldRenderer.setColorRGBA_I(rgb, a);
 
         if ((sides & GeometryMasks.Quad.DOWN) != 0) {
@@ -136,8 +156,7 @@ public class GeometryTessellator extends Tessellator {
         }
     }
 
-    private void drawLines(final double x0, final double y0, final double z0, final double x1, final double y1, final double z1, final int sides, final int rgb, int a) {
-        final WorldRenderer worldRenderer = getWorldRenderer();
+    public static void drawLines(final WorldRenderer worldRenderer, final double x0, final double y0, final double z0, final double x1, final double y1, final double z1, final int sides, final int rgb, final int a) {
         worldRenderer.setColorRGBA_I(rgb, a);
 
         if ((sides & GeometryMasks.Line.DOWN_WEST) != 0) {
