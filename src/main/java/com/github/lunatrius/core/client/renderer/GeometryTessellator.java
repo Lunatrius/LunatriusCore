@@ -9,8 +9,9 @@ import org.lwjgl.opengl.GL11;
 public class GeometryTessellator extends Tessellator {
     private static GeometryTessellator instance = null;
 
+    private static double deltaS = 0;
     private int mode = -1;
-    private static double delta = 0;
+    private double delta = 0;
 
     public GeometryTessellator() {
         this(0x200000);
@@ -52,8 +53,12 @@ public class GeometryTessellator extends Tessellator {
         return super.draw();
     }
 
-    public static void setDelta(final double delta) {
-        GeometryTessellator.delta = delta;
+    public void setDelta(final double delta) {
+        this.delta = delta;
+    }
+
+    public static void setStaticDelta(final double delta) {
+        deltaS = delta;
     }
 
     public void drawCuboid(final BlockPos pos, final int sides, final int color) {
@@ -73,12 +78,12 @@ public class GeometryTessellator extends Tessellator {
             return;
         }
 
-        final double x0 = begin.getX() - delta;
-        final double y0 = begin.getY() - delta;
-        final double z0 = begin.getZ() - delta;
-        final double x1 = end.getX() + 1 + delta;
-        final double y1 = end.getY() + 1 + delta;
-        final double z1 = end.getZ() + 1 + delta;
+        final double x0 = begin.getX() - this.delta;
+        final double y0 = begin.getY() - this.delta;
+        final double z0 = begin.getZ() - this.delta;
+        final double x1 = end.getX() + 1 + this.delta;
+        final double y1 = end.getY() + 1 + this.delta;
+        final double z1 = end.getZ() + 1 + this.delta;
 
         if (this.mode == GL11.GL_QUADS) {
             drawQuads(getWorldRenderer(), x0, y0, z0, x1, y1, z1, sides, rgb, a);
@@ -94,12 +99,12 @@ public class GeometryTessellator extends Tessellator {
     }
 
     public static void drawCuboid(final WorldRenderer worldRenderer, int mode, final BlockPos begin, final BlockPos end, final int sides, final int rgb, final int a) {
-        final double x0 = begin.getX() - delta;
-        final double y0 = begin.getY() - delta;
-        final double z0 = begin.getZ() - delta;
-        final double x1 = end.getX() + 1 + delta;
-        final double y1 = end.getY() + 1 + delta;
-        final double z1 = end.getZ() + 1 + delta;
+        final double x0 = begin.getX() - deltaS;
+        final double y0 = begin.getY() - deltaS;
+        final double z0 = begin.getZ() - deltaS;
+        final double x1 = end.getX() + 1 + deltaS;
+        final double y1 = end.getY() + 1 + deltaS;
+        final double z1 = end.getZ() + 1 + deltaS;
 
         if (mode == GL11.GL_QUADS) {
             drawQuads(worldRenderer, x0, y0, z0, x1, y1, z1, sides, rgb, a);
