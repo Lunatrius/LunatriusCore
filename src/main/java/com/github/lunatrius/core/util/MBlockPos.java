@@ -200,7 +200,7 @@ public class MBlockPos extends BlockPos {
         return this.z;
     }
 
-    public static Iterable<MBlockPos> getAllInBox(BlockPos from, BlockPos to) {
+    public static Iterable<MBlockPos> getAllInRange(BlockPos from, BlockPos to) {
         final BlockPos start = new BlockPos(Math.min(from.getX(), to.getX()), Math.min(from.getY(), to.getY()), Math.min(from.getZ(), to.getZ()));
         final BlockPos end = new BlockPos(Math.max(from.getX(), to.getX()), Math.max(from.getY(), to.getY()), Math.max(from.getZ(), to.getZ()));
         return new Iterable<MBlockPos>() {
@@ -208,33 +208,35 @@ public class MBlockPos extends BlockPos {
             public Iterator<MBlockPos> iterator() {
                 return new AbstractIterator<MBlockPos>() {
                     private MBlockPos pos = null;
+                    private int x;
+                    private int y;
+                    private int z;
 
                     @Override
                     protected MBlockPos computeNext() {
                         if (this.pos == null) {
-                            this.pos = new MBlockPos(start.getX(), start.getY(), start.getZ());
+                            this.x = start.getX();
+                            this.y = start.getY();
+                            this.z = start.getZ();
+                            this.pos = new MBlockPos(this.x, this.y, this.z);
                             return this.pos;
                         } else if (this.pos.equals(end)) {
                             return endOfData();
                         } else {
-                            int x = this.pos.x;
-                            int y = this.pos.y;
-                            int z = this.pos.z;
-
-                            if (x < end.getX()) {
-                                x++;
-                            } else if (y < end.getY()) {
-                                x = start.getX();
-                                y++;
-                            } else if (z < end.getZ()) {
-                                x = start.getX();
-                                y = start.getY();
-                                z++;
+                            if (this.x < end.getX()) {
+                                this.x++;
+                            } else if (this.y < end.getY()) {
+                                this.x = start.getX();
+                                this.y++;
+                            } else if (this.z < end.getZ()) {
+                                this.x = start.getX();
+                                this.y = start.getY();
+                                this.z++;
                             }
 
-                            this.pos.x = x;
-                            this.pos.y = y;
-                            this.pos.z = z;
+                            this.pos.x = this.x;
+                            this.pos.y = this.y;
+                            this.pos.z = this.z;
                             return this.pos;
                         }
                     }
