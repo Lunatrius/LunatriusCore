@@ -1,14 +1,11 @@
 package com.github.lunatrius.core.util;
 
-import com.google.common.collect.AbstractIterator;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.util.Vec3i;
-
-import java.util.Iterator;
 
 public class MBlockPos extends BlockPos {
     public int x;
@@ -188,48 +185,8 @@ public class MBlockPos extends BlockPos {
         return this.z;
     }
 
+    @Deprecated
     public static Iterable<MBlockPos> getAllInRange(BlockPos from, BlockPos to) {
-        final BlockPos start = new BlockPos(Math.min(from.getX(), to.getX()), Math.min(from.getY(), to.getY()), Math.min(from.getZ(), to.getZ()));
-        final BlockPos end = new BlockPos(Math.max(from.getX(), to.getX()), Math.max(from.getY(), to.getY()), Math.max(from.getZ(), to.getZ()));
-        return new Iterable<MBlockPos>() {
-            @Override
-            public Iterator<MBlockPos> iterator() {
-                return new AbstractIterator<MBlockPos>() {
-                    private MBlockPos pos = null;
-                    private int x;
-                    private int y;
-                    private int z;
-
-                    @Override
-                    protected MBlockPos computeNext() {
-                        if (this.pos == null) {
-                            this.x = start.getX();
-                            this.y = start.getY();
-                            this.z = start.getZ();
-                            this.pos = new MBlockPos(this.x, this.y, this.z);
-                            return this.pos;
-                        } else if (this.pos.equals(end)) {
-                            return endOfData();
-                        } else {
-                            if (this.x < end.getX()) {
-                                this.x++;
-                            } else if (this.y < end.getY()) {
-                                this.x = start.getX();
-                                this.y++;
-                            } else if (this.z < end.getZ()) {
-                                this.x = start.getX();
-                                this.y = start.getY();
-                                this.z++;
-                            }
-
-                            this.pos.x = this.x;
-                            this.pos.y = this.y;
-                            this.pos.z = this.z;
-                            return this.pos;
-                        }
-                    }
-                };
-            }
-        };
+        return BlockPosHelper.getAllInBox(from, to);
     }
 }
