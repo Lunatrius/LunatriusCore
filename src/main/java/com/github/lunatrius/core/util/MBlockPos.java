@@ -77,18 +77,12 @@ public class MBlockPos extends BlockPos {
 
     @Override
     public MBlockPos add(int x, int y, int z) {
-        this.x += x;
-        this.y += y;
-        this.z += z;
-        return this;
+        return new MBlockPos(this.x + x, this.y + y, this.z + z);
     }
 
     @Override
     public MBlockPos multiply(int factor) {
-        this.x *= factor;
-        this.y *= factor;
-        this.z *= factor;
-        return this;
+        return new MBlockPos(this.x * factor, this.y * factor, this.z * factor);
     }
 
     @SuppressWarnings("override")
@@ -101,10 +95,7 @@ public class MBlockPos extends BlockPos {
     }
 
     public MBlockPos subtract(int x, int y, int z) {
-        this.x -= x;
-        this.y -= y;
-        this.z -= z;
-        return this;
+        return new MBlockPos(this.x - x, this.y - y, this.z - z);
     }
 
     @Override
@@ -174,10 +165,7 @@ public class MBlockPos extends BlockPos {
 
     @Override
     public MBlockPos offset(EnumFacing facing, int n) {
-        this.x += facing.getFrontOffsetX() * n;
-        this.y += facing.getFrontOffsetY() * n;
-        this.z += facing.getFrontOffsetZ() * n;
-        return this;
+        return new MBlockPos(this.x + facing.getFrontOffsetX() * n, this.y + facing.getFrontOffsetY() * n, this.z + facing.getFrontOffsetZ() * n);
     }
 
     @Override
