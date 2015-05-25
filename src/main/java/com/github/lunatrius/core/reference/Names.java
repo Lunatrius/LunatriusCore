@@ -20,4 +20,8 @@ public final class Names {
 
         public static final String LANG_PREFIX = Reference.MODID.toLowerCase() + ".config";
     }
+
+    public static final class ModId {
+        public static final String DYNIOUS_VERSION_CHECKER = "VersionChecker";
+    }
 }

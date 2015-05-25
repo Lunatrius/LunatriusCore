@@ -1,6 +1,7 @@
 package com.github.lunatrius.core.version;
 
 import com.github.lunatrius.core.handler.ConfigurationHandler;
+import com.github.lunatrius.core.reference.Names;
 import com.github.lunatrius.core.reference.Reference;
 import com.google.common.base.Joiner;
 import com.google.common.io.ByteStreams;
@@ -21,35 +22,20 @@ import java.util.Map;
 import java.util.Set;
 
 public class VersionChecker {
-    public static final String RECOMMENDED_FORGE = "\n---\nRecommended Forge: %s";
-    public static final String VERCHECKAPI_URL = "http://mc.lunatri.us/json?latest=1&mc=%s&v=%d";
-    public static final int VERCHECKAPI_VER = 2;
+    public static final String VER_CHECK_API_URL = "http://mc.lunatri.us/json?latest=1&mc=%s&v=%d";
+    public static final int VER_CHECK_API_VER = 2;
 
-    public static final String VERSION = "%s -> %s";
-    public static final String UPDATEAVAILABLE = "\nUpdate is available (%s -> %s)!";
-    public static final String UPTODATE = "\nUp to date!";
-
-    public static final String UPDATEAVAILABLECON = "Update is available for %s (%s -> %s)!";
-    public static final String UPTODATECON = "%s is up to date!";
-    public static final String FUTURECON = "Is %s from the future?";
-
-    public static final String DYNIOUS_VERSIONCHECKER_MODID = "VersionChecker";
     public static final String UPDATE_URL = "https://mods.io/mods?author=Lunatrius";
 
     private static final List<ModMetadata> REGISTERED_MODS = new ArrayList<ModMetadata>();
     private static final Map<String, String> OUTDATED_MODS = new HashMap<String, String>();
     private static boolean done = false;
 
-    @Deprecated
-    public static void registerMod(ModMetadata modMetadata) {
-        registerMod(modMetadata, Reference.FORGE);
-    }
-
     public static void registerMod(ModMetadata modMetadata, String forgeVersion) {
         REGISTERED_MODS.add(modMetadata);
 
         if (modMetadata.description != null) {
-            modMetadata.description += String.format(RECOMMENDED_FORGE, forgeVersion);
+            modMetadata.description += "\n---\nCompiled against Forge " + forgeVersion;
         }
     }
 
@@ -75,14 +61,14 @@ public class VersionChecker {
                         return;
                     }
 
-                    URL url = new URL(String.format(VERCHECKAPI_URL, Reference.MINECRAFT, VERCHECKAPI_VER));
+                    URL url = new URL(String.format(VER_CHECK_API_URL, Reference.MINECRAFT, VER_CHECK_API_VER));
                     InputStream con = url.openStream();
                     String data = new String(ByteStreams.toByteArray(con));
                     con.close();
 
                     Map<String, Object> json = new Gson().fromJson(data, Map.class);
 
-                    if ((Double) json.get("version") == VERCHECKAPI_VER) {
+                    if ((Double) json.get("version") == VER_CHECK_API_VER) {
                         Map<String, Map<String, Map<String, Object>>> mods = (Map<String, Map<String, Map<String, Object>>>) json.get("mods");
 
                         for (ModMetadata modMetadata : REGISTERED_MODS) {
@@ -116,13 +102,12 @@ public class VersionChecker {
                                     if (ConfigurationHandler.canNotifyOfUpdate(modid, versionRemote.getVersionString())) {
                                         addOutdatedMod(modMetadata, versionLocal, versionRemote, Joiner.on("\n").join(changes));
                                     }
-                                    modMetadata.description += String.format(UPDATEAVAILABLE, versionLocal, versionRemote);
-                                    Reference.logger.info(String.format(UPDATEAVAILABLECON, modid, versionLocal, versionRemote));
+
+                                    Reference.logger.info("Update is available for {} ({} -> {})!", modid, versionLocal, versionRemote);
                                 } else if (diff == 0) {
-                                    modMetadata.description += UPTODATE;
-                                    Reference.logger.info(String.format(UPTODATECON, modid));
+                                    Reference.logger.info("{} is up to date!", modid);
                                 } else {
-                                    Reference.logger.info(String.format(FUTURECON, modid));
+                                    Reference.logger.info("Is {} from the future?", modid);
                                 }
 
                                 ConfigurationHandler.addUpdate(modid, versionRemote.getVersionString());
@@ -131,7 +116,7 @@ public class VersionChecker {
                             }
                         }
                     } else {
-                        Reference.logger.warn(String.format("Unsupported version (%s)!", json.get("version")));
+                        Reference.logger.warn("Unsupported version ({})!", json.get("version"));
                     }
                 } catch (Exception e) {
                     Reference.logger.error("Something went wrong!", e);
@@ -142,7 +127,7 @@ public class VersionChecker {
     }
 
     private static void addOutdatedMod(ModMetadata metadata, ArtifactVersion versionLocal, DefaultArtifactVersion versionRemote, String changeLog) {
-        if (Loader.isModLoaded(DYNIOUS_VERSIONCHECKER_MODID)) {
+        if (Loader.isModLoaded(Names.ModId.DYNIOUS_VERSION_CHECKER)) {
             NBTTagCompound data = new NBTTagCompound();
 
             data.setString("modDisplayName", metadata.name);
@@ -152,9 +137,9 @@ public class VersionChecker {
             data.setBoolean("isDirectLink", false);
             data.setString("changeLog", changeLog);
 
-            FMLInterModComms.sendRuntimeMessage(metadata.modId, DYNIOUS_VERSIONCHECKER_MODID, "addUpdate", data);
+            FMLInterModComms.sendRuntimeMessage(metadata.modId, Names.ModId.DYNIOUS_VERSION_CHECKER, "addUpdate", data);
         } else {
-            OUTDATED_MODS.put(metadata.name, String.format(VERSION, versionLocal, versionRemote));
+            OUTDATED_MODS.put(metadata.name, String.format("%s -> %s", versionLocal, versionRemote));
         }
     }
 }
