@@ -14,6 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -75,10 +76,12 @@ public class VersionChecker {
                         return;
                     }
 
-                    URL url = new URL(String.format(VERCHECKAPI_URL, Reference.MINECRAFT, VERCHECKAPI_VER));
-                    InputStream con = url.openStream();
-                    String data = new String(ByteStreams.toByteArray(con));
-                    con.close();
+                    final URL url = new URL(String.format(VERCHECKAPI_URL, Reference.MINECRAFT, VERCHECKAPI_VER));
+                    final URLConnection connection = url.openConnection();
+                    connection.addRequestProperty("User-Agent", Reference.MODID + "/" + Reference.VERSION);
+                    final InputStream inputStream = connection.getInputStream();
+                    final String data = new String(ByteStreams.toByteArray(inputStream));
+                    inputStream.close();
 
                     Map<String, Object> json = new Gson().fromJson(data, Map.class);
 
