@@ -15,7 +15,7 @@ public final class Names {
         public static final String KNOWN_VERSIONS = "knownVersions";
         public static final String KNOWN_VERSIONS_DESC = "A list of known updates. Deleting versions from the list will remind you about them again.";
 
-        public static final String LANG_PREFIX = Reference.MODID.toLowerCase() + ".config";
+        public static final String LANG_PREFIX = Reference.MODID_LOWER + ".config";
     }
 
     public static final class ModId {
