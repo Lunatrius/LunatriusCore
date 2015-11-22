@@ -2,7 +2,5 @@
 
 # gui - config - update checker
 
-# gui - config - tweaks
-
 # messages
 lunatriuscore.message.updatesavailable=Обновления доступны для %s.

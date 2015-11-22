@@ -8,9 +8,5 @@ lunatriuscore.config.checkForUpdates.tooltip=Soll die Mod auf Updates überprüf
 lunatriuscore.config.silenceKnownUpdates=verberge bekannte Updates
 lunatriuscore.config.silenceKnownUpdates.tooltip=Sollte die Mod an Updates erinnern, nur neuere Versionen (einmalig pro Version)?
 
-# gui - config - tweaks
-lunatriuscore.config.replaceInGameConfig=Ersetze Config GUI
-lunatriuscore.config.replaceInGameConfig.tooltip=Ersetzt Sie die FML Test GUI mit einer funktionierenden GUI.
-
 # messages
 lunatriuscore.message.updatesavailable=Es sind Updates verfügbar für %s.
