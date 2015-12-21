@@ -28,13 +28,6 @@ version = "${project.version_minecraft}-${modversion}"
 
 compileJava.options.encoding = 'UTF-8'
 
-idea {
-    module {
-        downloadSources = true
-        inheritOutputDirs = true
-    }
-}
-
 minecraft {
     version = "${project.version_minecraft}-${project.version_forge}"
 
