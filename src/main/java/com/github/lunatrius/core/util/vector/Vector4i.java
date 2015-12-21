@@ -7,15 +7,15 @@ public class Vector4i extends Vector3i {
         this(0, 0, 0, 0);
     }
 
-    public Vector4i(Vector4i vec) {
+    public Vector4i(final Vector4i vec) {
         this(vec.x, vec.y, vec.z, vec.w);
     }
 
-    public Vector4i(int num) {
+    public Vector4i(final int num) {
         this(num, num, num, num);
     }
 
-    public Vector4i(int x, int y, int z, int w) {
+    public Vector4i(final int x, final int y, final int z, final int w) {
         super(x, y, z);
         this.w = w;
     }
@@ -24,15 +24,15 @@ public class Vector4i extends Vector3i {
         return this.w;
     }
 
-    public final void setW(int w) {
+    public final void setW(final int w) {
         this.w = w;
     }
 
-    public Vector4i set(Vector4i vec) {
+    public Vector4i set(final Vector4i vec) {
         return set(vec.x, vec.y, vec.z, vec.w);
     }
 
-    public Vector4i set(int x, int y, int z, int w) {
+    public Vector4i set(final int x, final int y, final int z, final int w) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -45,11 +45,11 @@ public class Vector4i extends Vector3i {
         return this.x * this.x + this.y * this.y + this.z * this.z + this.w * this.w;
     }
 
-    public final double lengthTo(Vector4i vec) {
+    public final double lengthTo(final Vector4i vec) {
         return Math.sqrt(lengthSquaredTo(vec));
     }
 
-    public int lengthSquaredTo(Vector4i vec) {
+    public int lengthSquaredTo(final Vector4i vec) {
         return pow2(this.x - vec.x) + pow2(this.y - vec.y) + pow2(this.z - vec.z) + pow2(this.w - vec.w);
     }
 
@@ -62,12 +62,12 @@ public class Vector4i extends Vector3i {
         return this;
     }
 
-    public double dot(Vector4i vec) {
+    public double dot(final Vector4i vec) {
         return this.x * vec.x + this.y * vec.y + this.z * vec.z + this.w * vec.w;
     }
 
     @Override
-    public Vector4i scale(double scale) {
+    public Vector4i scale(final double scale) {
         this.x *= scale;
         this.y *= scale;
         this.z *= scale;
@@ -75,7 +75,7 @@ public class Vector4i extends Vector3i {
         return this;
     }
 
-    public Vector4i add(Vector4i vec) {
+    public Vector4i add(final Vector4i vec) {
         this.x += vec.x;
         this.y += vec.y;
         this.z += vec.z;
@@ -83,7 +83,7 @@ public class Vector4i extends Vector3i {
         return this;
     }
 
-    public Vector4i add(int x, int y, int z, int w) {
+    public Vector4i add(final int x, final int y, final int z, final int w) {
         this.x += x;
         this.y += y;
         this.z += z;
@@ -91,7 +91,7 @@ public class Vector4i extends Vector3i {
         return this;
     }
 
-    public Vector4i sub(Vector4i vec) {
+    public Vector4i sub(final Vector4i vec) {
         this.x -= vec.x;
         this.y -= vec.y;
         this.z -= vec.z;
@@ -99,7 +99,7 @@ public class Vector4i extends Vector3i {
         return this;
     }
 
-    public Vector4i sub(int x, int y, int z, int w) {
+    public Vector4i sub(final int x, final int y, final int z, final int w) {
         this.x -= x;
         this.y -= y;
         this.z -= z;
@@ -111,7 +111,7 @@ public class Vector4i extends Vector3i {
         return new Vector4f(this.x, this.y, this.z, this.w);
     }
 
-    public Vector4f toVector4f(Vector4f vec) {
+    public Vector4f toVector4f(final Vector4f vec) {
         return vec.set(this.x, this.y, this.z, this.w);
     }
 
@@ -119,7 +119,7 @@ public class Vector4i extends Vector3i {
         return new Vector4d(this.x, this.y, this.z, this.w);
     }
 
-    public Vector4d toVector4d(Vector4d vec) {
+    public Vector4d toVector4d(final Vector4d vec) {
         return vec.set(this.x, this.y, this.z, this.w);
     }
 
@@ -129,11 +129,11 @@ public class Vector4i extends Vector3i {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         return obj instanceof Vector4i && equals((Vector4i) obj);
     }
 
-    public boolean equals(Vector4i vec) {
+    public boolean equals(final Vector4i vec) {
         return this.x == vec.x && this.y == vec.y && this.z == vec.z && this.w == vec.w;
     }
 

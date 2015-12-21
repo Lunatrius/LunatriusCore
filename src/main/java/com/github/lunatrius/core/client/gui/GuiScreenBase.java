@@ -12,7 +12,6 @@ import java.util.List;
 public class GuiScreenBase extends GuiScreen {
     protected final GuiScreen parentScreen;
 
-    protected List<GuiButton> buttonList = super.buttonList; // I feel dirty
     protected List<GuiTextField> textFields = new ArrayList<GuiTextField>();
 
     public GuiScreenBase() {
@@ -30,15 +29,15 @@ public class GuiScreenBase extends GuiScreen {
     }
 
     @Override
-    protected void mouseClicked(int mouseX, int mouseY, int mouseEvent) throws IOException {
-        for (GuiButton button : this.buttonList) {
+    protected void mouseClicked(final int mouseX, final int mouseY, final int mouseEvent) throws IOException {
+        for (final GuiButton button : this.buttonList) {
             if (button instanceof GuiNumericField) {
-                GuiNumericField numericField = (GuiNumericField) button;
+                final GuiNumericField numericField = (GuiNumericField) button;
                 numericField.mouseClicked(mouseX, mouseY, mouseEvent);
             }
         }
 
-        for (GuiTextField textField : this.textFields) {
+        for (final GuiTextField textField : this.textFields) {
             textField.mouseClicked(mouseX, mouseY, mouseEvent);
         }
 
@@ -46,15 +45,15 @@ public class GuiScreenBase extends GuiScreen {
     }
 
     @Override
-    protected void keyTyped(char character, int code) throws IOException {
+    protected void keyTyped(final char character, final int code) throws IOException {
         if (code == Keyboard.KEY_ESCAPE) {
             this.mc.displayGuiScreen(this.parentScreen);
             return;
         }
 
-        for (GuiButton button : this.buttonList) {
+        for (final GuiButton button : this.buttonList) {
             if (button instanceof GuiNumericField) {
-                GuiNumericField numericField = (GuiNumericField) button;
+                final GuiNumericField numericField = (GuiNumericField) button;
                 numericField.keyTyped(character, code);
 
                 if (numericField.isFocused()) {
@@ -63,7 +62,7 @@ public class GuiScreenBase extends GuiScreen {
             }
         }
 
-        for (GuiTextField textField : this.textFields) {
+        for (final GuiTextField textField : this.textFields) {
             textField.textboxKeyTyped(character, code);
         }
 
@@ -74,23 +73,23 @@ public class GuiScreenBase extends GuiScreen {
     public void updateScreen() {
         super.updateScreen();
 
-        for (GuiButton button : this.buttonList) {
+        for (final GuiButton button : this.buttonList) {
             if (button instanceof GuiNumericField) {
-                GuiNumericField numericField = (GuiNumericField) button;
+                final GuiNumericField numericField = (GuiNumericField) button;
                 numericField.updateCursorCounter();
             }
         }
 
-        for (GuiTextField textField : this.textFields) {
+        for (final GuiTextField textField : this.textFields) {
             textField.updateCursorCounter();
         }
     }
 
     @Override
-    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+    public void drawScreen(final int mouseX, final int mouseY, final float partialTicks) {
         super.drawScreen(mouseX, mouseY, partialTicks);
 
-        for (GuiTextField textField : this.textFields) {
+        for (final GuiTextField textField : this.textFields) {
             textField.drawTextBox();
         }
     }

@@ -7,15 +7,15 @@ public class Vector3i extends Vector2i {
         this(0, 0, 0);
     }
 
-    public Vector3i(Vector3i vec) {
+    public Vector3i(final Vector3i vec) {
         this(vec.x, vec.y, vec.z);
     }
 
-    public Vector3i(int num) {
+    public Vector3i(final int num) {
         this(num, num, num);
     }
 
-    public Vector3i(int x, int y, int z) {
+    public Vector3i(final int x, final int y, final int z) {
         super(x, y);
         this.z = z;
     }
@@ -24,15 +24,15 @@ public class Vector3i extends Vector2i {
         return this.z;
     }
 
-    public final void setZ(int z) {
+    public final void setZ(final int z) {
         this.z = z;
     }
 
-    public Vector3i set(Vector3i vec) {
+    public Vector3i set(final Vector3i vec) {
         return set(vec.x, vec.y, vec.z);
     }
 
-    public Vector3i set(int x, int y, int z) {
+    public Vector3i set(final int x, final int y, final int z) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -44,11 +44,11 @@ public class Vector3i extends Vector2i {
         return this.x * this.x + this.y * this.y + this.z * this.z;
     }
 
-    public final double lengthTo(Vector3i vec) {
+    public final double lengthTo(final Vector3i vec) {
         return Math.sqrt(lengthSquaredTo(vec));
     }
 
-    public int lengthSquaredTo(Vector3i vec) {
+    public int lengthSquaredTo(final Vector3i vec) {
         return pow2(this.x - vec.x) + pow2(this.y - vec.y) + pow2(this.z - vec.z);
     }
 
@@ -60,40 +60,40 @@ public class Vector3i extends Vector2i {
         return this;
     }
 
-    public double dot(Vector3i vec) {
+    public double dot(final Vector3i vec) {
         return this.x * vec.x + this.y * vec.y + this.z * vec.z;
     }
 
     @Override
-    public Vector3i scale(double scale) {
+    public Vector3i scale(final double scale) {
         this.x *= scale;
         this.y *= scale;
         this.z *= scale;
         return this;
     }
 
-    public Vector3i add(Vector3i vec) {
+    public Vector3i add(final Vector3i vec) {
         this.x += vec.x;
         this.y += vec.y;
         this.z += vec.z;
         return this;
     }
 
-    public Vector3i add(int x, int y, int z) {
+    public Vector3i add(final int x, final int y, final int z) {
         this.x += x;
         this.y += y;
         this.z += z;
         return this;
     }
 
-    public Vector3i sub(Vector3i vec) {
+    public Vector3i sub(final Vector3i vec) {
         this.x -= vec.x;
         this.y -= vec.y;
         this.z -= vec.z;
         return this;
     }
 
-    public Vector3i sub(int x, int y, int z) {
+    public Vector3i sub(final int x, final int y, final int z) {
         this.x -= x;
         this.y -= y;
         this.z -= z;
@@ -104,7 +104,7 @@ public class Vector3i extends Vector2i {
         return new Vector3f(this.x, this.y, this.z);
     }
 
-    public Vector3f toVector3f(Vector3f vec) {
+    public Vector3f toVector3f(final Vector3f vec) {
         return vec.set(this.x, this.y, this.z);
     }
 
@@ -112,7 +112,7 @@ public class Vector3i extends Vector2i {
         return new Vector3d(this.x, this.y, this.z);
     }
 
-    public Vector3d toVector3d(Vector3d vec) {
+    public Vector3d toVector3d(final Vector3d vec) {
         return vec.set(this.x, this.y, this.z);
     }
 
@@ -122,11 +122,11 @@ public class Vector3i extends Vector2i {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         return obj instanceof Vector3i && equals((Vector3i) obj);
     }
 
-    public boolean equals(Vector3i vec) {
+    public boolean equals(final Vector3i vec) {
         return this.x == vec.x && this.y == vec.y && this.z == vec.z;
     }
 

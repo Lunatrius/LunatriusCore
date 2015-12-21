@@ -7,15 +7,15 @@ public class Vector4d extends Vector3d {
         this(0, 0, 0, 0);
     }
 
-    public Vector4d(Vector4d vec) {
+    public Vector4d(final Vector4d vec) {
         this(vec.x, vec.y, vec.z, vec.w);
     }
 
-    public Vector4d(double num) {
+    public Vector4d(final double num) {
         this(num, num, num, num);
     }
 
-    public Vector4d(double x, double y, double z, double w) {
+    public Vector4d(final double x, final double y, final double z, final double w) {
         super(x, y, z);
         this.w = w;
     }
@@ -24,15 +24,15 @@ public class Vector4d extends Vector3d {
         return this.w;
     }
 
-    public final void setW(double w) {
+    public final void setW(final double w) {
         this.w = w;
     }
 
-    public Vector4d set(Vector4d vec) {
+    public Vector4d set(final Vector4d vec) {
         return set(vec.x, vec.y, vec.z, vec.w);
     }
 
-    public Vector4d set(double x, double y, double z, double w) {
+    public Vector4d set(final double x, final double y, final double z, final double w) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -45,11 +45,11 @@ public class Vector4d extends Vector3d {
         return this.x * this.x + this.y * this.y + this.z * this.z + this.w * this.w;
     }
 
-    public final double lengthTo(Vector4d vec) {
+    public final double lengthTo(final Vector4d vec) {
         return Math.sqrt(lengthSquaredTo(vec));
     }
 
-    public double lengthSquaredTo(Vector4d vec) {
+    public double lengthSquaredTo(final Vector4d vec) {
         return pow2(this.x - vec.x) + pow2(this.y - vec.y) + pow2(this.z - vec.z) + pow2(this.w - vec.w);
     }
 
@@ -62,12 +62,12 @@ public class Vector4d extends Vector3d {
         return this;
     }
 
-    public double dot(Vector4d vec) {
+    public double dot(final Vector4d vec) {
         return this.x * vec.x + this.y * vec.y + this.z * vec.z + this.w * vec.w;
     }
 
     @Override
-    public Vector4d scale(double scale) {
+    public Vector4d scale(final double scale) {
         this.x *= scale;
         this.y *= scale;
         this.z *= scale;
@@ -75,7 +75,7 @@ public class Vector4d extends Vector3d {
         return this;
     }
 
-    public Vector4d add(Vector4d vec) {
+    public Vector4d add(final Vector4d vec) {
         this.x += vec.x;
         this.y += vec.y;
         this.z += vec.z;
@@ -83,7 +83,7 @@ public class Vector4d extends Vector3d {
         return this;
     }
 
-    public Vector4d add(double x, double y, double z, double w) {
+    public Vector4d add(final double x, final double y, final double z, final double w) {
         this.x += x;
         this.y += y;
         this.z += z;
@@ -91,7 +91,7 @@ public class Vector4d extends Vector3d {
         return this;
     }
 
-    public Vector4d sub(Vector4d vec) {
+    public Vector4d sub(final Vector4d vec) {
         this.x -= vec.x;
         this.y -= vec.y;
         this.z -= vec.z;
@@ -99,7 +99,7 @@ public class Vector4d extends Vector3d {
         return this;
     }
 
-    public Vector4d sub(double x, double y, double z, double w) {
+    public Vector4d sub(final double x, final double y, final double z, final double w) {
         this.x -= x;
         this.y -= y;
         this.z -= z;
@@ -111,7 +111,7 @@ public class Vector4d extends Vector3d {
         return new Vector4i((int) Math.floor(this.x), (int) Math.floor(this.y), (int) Math.floor(this.z), (int) Math.floor(this.w));
     }
 
-    public Vector4i toVector4i(Vector4i vec) {
+    public Vector4i toVector4i(final Vector4i vec) {
         return vec.set((int) Math.floor(this.x), (int) Math.floor(this.y), (int) Math.floor(this.z), (int) Math.floor(this.w));
     }
 
@@ -119,7 +119,7 @@ public class Vector4d extends Vector3d {
         return new Vector4f((float) Math.floor(this.x), (float) Math.floor(this.y), (float) Math.floor(this.z), (float) Math.floor(this.w));
     }
 
-    public Vector4f toVector4f(Vector4f vec) {
+    public Vector4f toVector4f(final Vector4f vec) {
         return vec.set((float) Math.floor(this.x), (float) Math.floor(this.y), (float) Math.floor(this.z), (float) Math.floor(this.w));
     }
 
@@ -129,15 +129,15 @@ public class Vector4d extends Vector3d {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         return obj instanceof Vector4d && equals((Vector4d) obj);
     }
 
-    public boolean equals(Vector4d vec) {
+    public boolean equals(final Vector4d vec) {
         return equals(vec, DOUBLE_EPSILON);
     }
 
-    public boolean equals(Vector4d vec, double epsilon) {
+    public boolean equals(final Vector4d vec, final double epsilon) {
         return Math.abs(this.x - vec.x) < epsilon && Math.abs(this.y - vec.y) < epsilon && Math.abs(this.z - vec.z) < epsilon && Math.abs(this.w - vec.w) < epsilon;
     }
 

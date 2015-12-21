@@ -18,15 +18,15 @@ public class GuiNumericField extends GuiButton {
     private int maximum = Integer.MAX_VALUE;
     private boolean wasFocused = false;
 
-    public GuiNumericField(FontRenderer fontRenderer, int id, int x, int y) {
+    public GuiNumericField(final FontRenderer fontRenderer, final int id, final int x, final int y) {
         this(fontRenderer, id, x, y, 100, 20);
     }
 
-    public GuiNumericField(FontRenderer fontRenderer, int id, int x, int y, int width) {
+    public GuiNumericField(final FontRenderer fontRenderer, final int id, final int x, final int y, final int width) {
         this(fontRenderer, id, x, y, width, 20);
     }
 
-    public GuiNumericField(FontRenderer fontRenderer, int id, int x, int y, int width, int height) {
+    public GuiNumericField(final FontRenderer fontRenderer, final int id, final int x, final int y, final int width, final int height) {
         super(id, 0, 0, width, height, "");
         this.guiTextField = new GuiTextField(0, fontRenderer, x + 1, y + 1, width - BUTTON_WIDTH * 2 - 2, height - 2);
         this.guiButtonDec = new GuiButton(1, x + width - BUTTON_WIDTH * 2, y, BUTTON_WIDTH, height, "-");
@@ -36,7 +36,7 @@ public class GuiNumericField extends GuiButton {
     }
 
     @Override
-    public boolean mousePressed(Minecraft minecraft, int x, int y) {
+    public boolean mousePressed(final Minecraft minecraft, final int x, final int y) {
         if (this.wasFocused && !this.guiTextField.isFocused()) {
             this.wasFocused = false;
             return true;
@@ -48,7 +48,7 @@ public class GuiNumericField extends GuiButton {
     }
 
     @Override
-    public void drawButton(Minecraft minecraft, int x, int y) {
+    public void drawButton(final Minecraft minecraft, final int x, final int y) {
         if (this.visible) {
             this.guiTextField.drawTextBox();
             this.guiButtonInc.drawButton(minecraft, x, y);
@@ -56,8 +56,8 @@ public class GuiNumericField extends GuiButton {
         }
     }
 
-    public void mouseClicked(int x, int y, int action) {
-        Minecraft minecraft = Minecraft.getMinecraft();
+    public void mouseClicked(final int x, final int y, final int action) {
+        final Minecraft minecraft = Minecraft.getMinecraft();
 
         this.guiTextField.mouseClicked(x, y, action);
 
@@ -70,17 +70,17 @@ public class GuiNumericField extends GuiButton {
         }
     }
 
-    public boolean keyTyped(char character, int code) {
+    public boolean keyTyped(final char character, final int code) {
         if (!this.guiTextField.isFocused()) {
             return false;
         }
 
-        int cursorPositionOld = this.guiTextField.getCursorPosition();
+        final int cursorPositionOld = this.guiTextField.getCursorPosition();
 
         this.guiTextField.textboxKeyTyped(character, code);
 
         String text = this.guiTextField.getText();
-        int cursorPositionNew = this.guiTextField.getCursorPosition();
+        final int cursorPositionNew = this.guiTextField.getCursorPosition();
 
         if (text.length() == 0 || text.equals("-")) {
             return true;
@@ -108,7 +108,7 @@ public class GuiNumericField extends GuiButton {
             this.previous = text;
 
             return true;
-        } catch (NumberFormatException nfe) {
+        } catch (final NumberFormatException nfe) {
             this.guiTextField.setText(this.previous);
             this.guiTextField.setCursorPosition(cursorPositionOld);
         }
@@ -125,7 +125,7 @@ public class GuiNumericField extends GuiButton {
         return this.guiTextField.isFocused();
     }
 
-    public void setPosition(int x, int y) {
+    public void setPosition(final int x, final int y) {
         this.guiTextField.xPosition = x + 1;
         this.guiTextField.yPosition = y + 1;
         this.guiButtonInc.xPosition = x + width - BUTTON_WIDTH * 2;
@@ -134,14 +134,14 @@ public class GuiNumericField extends GuiButton {
         this.guiButtonDec.yPosition = y;
     }
 
-    public void setEnabled(boolean enabled) {
+    public void setEnabled(final boolean enabled) {
         this.enabled = enabled;
         this.guiTextField.setEnabled(enabled);
         this.guiButtonInc.enabled = enabled;
         this.guiButtonDec.enabled = enabled;
     }
 
-    public void setMinimum(int minimum) {
+    public void setMinimum(final int minimum) {
         this.minimum = minimum;
     }
 
@@ -149,7 +149,7 @@ public class GuiNumericField extends GuiButton {
         return this.minimum;
     }
 
-    public void setMaximum(int maximum) {
+    public void setMaximum(final int maximum) {
         this.maximum = maximum;
     }
 

@@ -22,7 +22,7 @@ public abstract class CommonProxy {
     }
 
     public void postInit(final FMLPostInitializationEvent event) {
-        if (ConfigurationHandler.checkForUpdates) {
+        if (VersionChecker.isAllowedToCheck("Global") && ConfigurationHandler.checkForUpdates) {
             VersionChecker.startVersionCheck();
         }
     }
@@ -35,11 +35,10 @@ public abstract class CommonProxy {
         }
     }
 
-    private void processMessage(String sender, String forgeVersion) {
-        for (final ModContainer container : Loader.instance().getActiveModList()) {
-            if (sender.equals(container.getModId())) {
-                VersionChecker.registerMod(container.getMetadata(), forgeVersion);
-            }
+    private void processMessage(final String sender, final String forgeVersion) {
+        final ModContainer container = Loader.instance().getIndexedModList().get(sender);
+        if (container != null) {
+            VersionChecker.registerMod(container, forgeVersion);
         }
     }
 }

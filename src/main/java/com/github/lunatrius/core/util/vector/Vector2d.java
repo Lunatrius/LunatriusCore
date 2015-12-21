@@ -9,15 +9,15 @@ public class Vector2d {
         this(0, 0);
     }
 
-    public Vector2d(Vector2d vec) {
+    public Vector2d(final Vector2d vec) {
         this(vec.x, vec.y);
     }
 
-    public Vector2d(double num) {
+    public Vector2d(final double num) {
         this(num, num);
     }
 
-    public Vector2d(double x, double y) {
+    public Vector2d(final double x, final double y) {
         this.x = x;
         this.y = y;
     }
@@ -30,19 +30,19 @@ public class Vector2d {
         return this.y;
     }
 
-    public final void setX(double x) {
+    public final void setX(final double x) {
         this.x = x;
     }
 
-    public final void setY(double y) {
+    public final void setY(final double y) {
         this.y = y;
     }
 
-    public Vector2d set(Vector2d vec) {
+    public Vector2d set(final Vector2d vec) {
         return set(vec.x, vec.y);
     }
 
-    public Vector2d set(double x, double y) {
+    public Vector2d set(final double x, final double y) {
         this.x = x;
         this.y = y;
         return this;
@@ -56,20 +56,20 @@ public class Vector2d {
         return this.x * this.x + this.y * this.y;
     }
 
-    public final double lengthTo(Vector2d vec) {
+    public final double lengthTo(final Vector2d vec) {
         return Math.sqrt(lengthSquaredTo(vec));
     }
 
-    public double lengthSquaredTo(Vector2d vec) {
+    public double lengthSquaredTo(final Vector2d vec) {
         return pow2(this.x - vec.x) + pow2(this.y - vec.y);
     }
 
-    protected final double pow2(double num) {
+    protected final double pow2(final double num) {
         return num * num;
     }
 
     public final Vector2d normalize() {
-        double len = length();
+        final double len = length();
         if (len != 0.0) {
             return scale(1.0 / len);
         }
@@ -83,35 +83,35 @@ public class Vector2d {
         return this;
     }
 
-    public double dot(Vector2d vec) {
+    public double dot(final Vector2d vec) {
         return this.x * vec.x + this.y * vec.y;
     }
 
-    public Vector2d scale(double scale) {
+    public Vector2d scale(final double scale) {
         this.x *= scale;
         this.y *= scale;
         return this;
     }
 
-    public Vector2d add(Vector2d vec) {
+    public Vector2d add(final Vector2d vec) {
         this.x += vec.x;
         this.y += vec.y;
         return this;
     }
 
-    public Vector2d add(double x, double y) {
+    public Vector2d add(final double x, final double y) {
         this.x += x;
         this.y += y;
         return this;
     }
 
-    public Vector2d sub(Vector2d vec) {
+    public Vector2d sub(final Vector2d vec) {
         this.x -= vec.x;
         this.y -= vec.y;
         return this;
     }
 
-    public Vector2d sub(double x, double y) {
+    public Vector2d sub(final double x, final double y) {
         this.x -= x;
         this.y -= y;
         return this;
@@ -121,7 +121,7 @@ public class Vector2d {
         return new Vector2i((int) Math.floor(this.x), (int) Math.floor(this.y));
     }
 
-    public Vector2i toVector2i(Vector2i vec) {
+    public Vector2i toVector2i(final Vector2i vec) {
         return vec.set((int) Math.floor(this.x), (int) Math.floor(this.y));
     }
 
@@ -129,7 +129,7 @@ public class Vector2d {
         return new Vector2f((float) Math.floor(this.x), (float) Math.floor(this.y));
     }
 
-    public Vector2f toVector2f(Vector2f vec) {
+    public Vector2f toVector2f(final Vector2f vec) {
         return vec.set((float) Math.floor(this.x), (float) Math.floor(this.y));
     }
 
@@ -139,15 +139,15 @@ public class Vector2d {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         return obj instanceof Vector2d && equals((Vector2d) obj);
     }
 
-    public boolean equals(Vector2d vec) {
+    public boolean equals(final Vector2d vec) {
         return equals(vec, DOUBLE_EPSILON);
     }
 
-    public boolean equals(Vector2d vec, double epsilon) {
+    public boolean equals(final Vector2d vec, final double epsilon) {
         return Math.abs(this.x - vec.x) < epsilon && Math.abs(this.y - vec.y) < epsilon;
     }
 
