@@ -1,7 +1,7 @@
-package com.github.lunatrius.core.util;
+package com.github.lunatrius.core.util.math;
 
 import com.google.common.collect.AbstractIterator;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 
 import java.util.Iterator;
 

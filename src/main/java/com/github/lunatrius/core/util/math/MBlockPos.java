@@ -1,11 +1,11 @@
-package com.github.lunatrius.core.util;
+package com.github.lunatrius.core.util.math;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
-import net.minecraft.util.Vec3i;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vec3i;
 
 public class MBlockPos extends BlockPos {
     public int x;
@@ -20,7 +20,7 @@ public class MBlockPos extends BlockPos {
         this(source.posX, source.posY, source.posZ);
     }
 
-    public MBlockPos(final Vec3 source) {
+    public MBlockPos(final Vec3d source) {
         this(source.xCoord, source.yCoord, source.zCoord);
     }
 
@@ -43,7 +43,7 @@ public class MBlockPos extends BlockPos {
         return set(source.posX, source.posY, source.posZ);
     }
 
-    public MBlockPos set(final Vec3 source) {
+    public MBlockPos set(final Vec3d source) {
         return set(source.xCoord, source.yCoord, source.zCoord);
     }
 
