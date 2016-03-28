@@ -170,6 +170,11 @@ public class MBlockPos extends BlockPos {
     }
 
     @Override
+    public BlockPos toImmutable() {
+        return new BlockPos(this);
+    }
+
+    @Override
     public int getX() {
         return this.x;
     }
@@ -182,10 +187,5 @@ public class MBlockPos extends BlockPos {
     @Override
     public int getZ() {
         return this.z;
-    }
-
-    @Deprecated
-    public static Iterable<MBlockPos> getAllInRange(final BlockPos from, final BlockPos to) {
-        return BlockPosHelper.getAllInBox(from, to);
     }
 }
