@@ -24,7 +24,7 @@ public class GuiHelper {
     }
 
     public static void drawItemStackSlot(final TextureManager textureManager, final int x, final int y) {
-        textureManager.bindTexture(Gui.statIcons);
+        textureManager.bindTexture(Gui.STAT_ICONS);
 
         final Tessellator tessellator = Tessellator.getInstance();
         final VertexBuffer buffer = tessellator.getBuffer();
