@@ -8,9 +8,9 @@ public class ChunkHelper {
     private static final Random RANDOM = new Random();
 
     public static boolean isSlimeChunk(final long seed, final BlockPos pos) {
-        final int x = pos.getX() >> 4;
-        final int z = pos.getZ() >> 4;
-        RANDOM.setSeed(seed + (x * x * 4987142) + (x * 5947611) + (z * z * 4392871) + (z * 389711) ^ 987234911);
+        final long x = pos.getX() >> 4;
+        final long z = pos.getZ() >> 4;
+        RANDOM.setSeed(seed + (x * x * 4987142L) + (x * 5947611L) + (z * z * 4392871L) + (z * 389711L) ^ 987234911L);
         return RANDOM.nextInt(10) == 0;
     }
 }
