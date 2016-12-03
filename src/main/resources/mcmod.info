@@ -2,7 +2,7 @@
 	"modListVersion": 2,
 	"modList": [
 		{
-			"modid": "LunatriusCore",
+			"modid": "lunatriuscore",
 			"name": "LunatriusCore",
 			"description": "A collection of utilities for Lunatrius' mods.",
 			"mcversion": "${mcversion}",
@@ -12,9 +12,9 @@
 			],
 			"credits": "",
 			"dependants": [  ],
-			"dependencies": [ "Forge@[${minforgeversion},)" ],
+			"dependencies": [ "forge@[${minforgeversion},)" ],
 			"parent": "",
-			"requiredMods": [ "Forge@[${minforgeversion},)" ],
+			"requiredMods": [ "forge@[${minforgeversion},)" ],
 			"logoFile": "",
 			"screenshots": [  ],
 			"updateUrl": "http://mc.lunatri.us/",

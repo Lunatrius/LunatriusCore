@@ -11,7 +11,7 @@ public final class Names {
         public static final String CHECK_FOR_UPDATES = "checkForUpdates";
         public static final String CHECK_FOR_UPDATES_DESC = "Should the mod check for updates?";
 
-        public static final String LANG_PREFIX = Reference.MODID_LOWER + ".config";
+        public static final String LANG_PREFIX = Reference.MODID + ".config";
     }
 
     public static final class ModId {

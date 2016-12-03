@@ -29,7 +29,7 @@ public class MBlockPos extends BlockPos {
     }
 
     public MBlockPos(final double x, final double y, final double z) {
-        this(MathHelper.floor_double(x), MathHelper.floor_double(y), MathHelper.floor_double(z));
+        this(MathHelper.floor(x), MathHelper.floor(y), MathHelper.floor(z));
     }
 
     public MBlockPos(final int x, final int y, final int z) {
@@ -52,7 +52,7 @@ public class MBlockPos extends BlockPos {
     }
 
     public MBlockPos set(final double x, final double y, final double z) {
-        return set(MathHelper.floor_double(x), MathHelper.floor_double(y), MathHelper.floor_double(z));
+        return set(MathHelper.floor(x), MathHelper.floor(y), MathHelper.floor(z));
     }
 
     public MBlockPos set(final int x, final int y, final int z) {
@@ -69,7 +69,7 @@ public class MBlockPos extends BlockPos {
 
     @Override
     public MBlockPos add(final double x, final double y, final double z) {
-        return add(MathHelper.floor_double(x), MathHelper.floor_double(y), MathHelper.floor_double(z));
+        return add(MathHelper.floor(x), MathHelper.floor(y), MathHelper.floor(z));
     }
 
     @Override
@@ -87,7 +87,7 @@ public class MBlockPos extends BlockPos {
     }
 
     public MBlockPos subtract(final double x, final double y, final double z) {
-        return subtract(MathHelper.floor_double(x), MathHelper.floor_double(y), MathHelper.floor_double(z));
+        return subtract(MathHelper.floor(x), MathHelper.floor(y), MathHelper.floor(z));
     }
 
     public MBlockPos subtract(final int x, final int y, final int z) {
