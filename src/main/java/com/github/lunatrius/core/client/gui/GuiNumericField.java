@@ -48,11 +48,11 @@ public class GuiNumericField extends GuiButton {
     }
 
     @Override
-    public void drawButton(final Minecraft minecraft, final int x, final int y) {
+    public void drawButton(final Minecraft minecraft, final int x, final int y, final float PartialTicks) {
         if (this.visible) {
             this.guiTextField.drawTextBox();
-            this.guiButtonInc.drawButton(minecraft, x, y);
-            this.guiButtonDec.drawButton(minecraft, x, y);
+            this.guiButtonInc.drawButton(minecraft, x, y, PartialTicks);
+            this.guiButtonDec.drawButton(minecraft, x, y, PartialTicks);
         }
     }
 
@@ -126,12 +126,12 @@ public class GuiNumericField extends GuiButton {
     }
 
     public void setPosition(final int x, final int y) {
-        this.guiTextField.xPosition = x + 1;
-        this.guiTextField.yPosition = y + 1;
-        this.guiButtonInc.xPosition = x + width - BUTTON_WIDTH * 2;
-        this.guiButtonInc.yPosition = y;
-        this.guiButtonDec.xPosition = x + width - BUTTON_WIDTH * 1;
-        this.guiButtonDec.yPosition = y;
+        this.guiTextField.x = x + 1;
+        this.guiTextField.y = y + 1;
+        this.guiButtonInc.x = x + width - BUTTON_WIDTH * 2;
+        this.guiButtonInc.y = y;
+        this.guiButtonDec.x = x + width - BUTTON_WIDTH * 1;
+        this.guiButtonDec.y = y;
     }
 
     public void setEnabled(final boolean enabled) {

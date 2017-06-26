@@ -34,4 +34,16 @@ public class GuiFactory implements IModGuiFactory {
             super(parent, Reference.MODID, ConfigurationHandler.configuration, Names.Config.LANG_PREFIX);
         }
     }
+
+	@Override
+	public GuiScreen createConfigGui(GuiScreen arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean hasConfigGui() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
