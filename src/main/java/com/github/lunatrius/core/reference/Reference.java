@@ -11,7 +11,6 @@ public class Reference {
     public static final String MINECRAFT = "${mcversion}";
     public static final String PROXY_SERVER = "com.github.lunatrius.core.proxy.ServerProxy";
     public static final String PROXY_CLIENT = "com.github.lunatrius.core.proxy.ClientProxy";
-    public static final String GUI_FACTORY = "com.github.lunatrius.core.client.gui.config.GuiFactory";
 
     public static Logger logger = LogManager.getLogger(Reference.MODID);
 }

@@ -1,5 +1,5 @@
 # gui - categories
 
 # gui - config - update checker
-lunatriuscore.config.checkForUpdates=检测版本更新
-lunatriuscore.config.checkForUpdates.tooltip=是否让该Mod检测版本更新?
+lunatriuscore.versioncheck.checkforupdates=检测版本更新
+lunatriuscore.versioncheck.checkforupdates.tooltip=是否让该Mod检测版本更新?

@@ -13,7 +13,6 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 public abstract class CommonProxy {
     public void preInit(final FMLPreInitializationEvent event) {
         Reference.logger = event.getModLog();
-        ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 
         FMLInterModComms.sendMessage(Reference.MODID, "checkUpdate", Reference.FORGE);
     }
@@ -22,7 +21,7 @@ public abstract class CommonProxy {
     }
 
     public void postInit(final FMLPostInitializationEvent event) {
-        if (VersionChecker.isAllowedToCheck("Global") && ConfigurationHandler.checkForUpdates) {
+        if (VersionChecker.isAllowedToCheck("Global") && ConfigurationHandler.VersionCheck.checkForUpdates) {
             VersionChecker.startVersionCheck();
         }
     }

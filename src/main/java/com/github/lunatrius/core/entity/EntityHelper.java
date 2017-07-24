@@ -21,7 +21,7 @@ public class EntityHelper {
         for (int slot = 0; slot < inventorySize; slot++) {
             final ItemStack itemStack = inventory.getStackInSlot(slot);
 
-            if (itemStack != null && itemStack.getItem() == item && (itemDamage == WILDMARK || itemDamage == itemStack.getItemDamage())) {
+            if (itemStack.getItem() == item && (itemDamage == WILDMARK || itemDamage == itemStack.getItemDamage())) {
                 count += itemStack.getCount();
             }
         }

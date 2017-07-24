@@ -21,7 +21,7 @@ public class MBlockPos extends BlockPos {
     }
 
     public MBlockPos(final Vec3d source) {
-        this(source.xCoord, source.yCoord, source.zCoord);
+        this(source.x, source.y, source.z);
     }
 
     public MBlockPos(final Vec3i source) {
@@ -44,7 +44,7 @@ public class MBlockPos extends BlockPos {
     }
 
     public MBlockPos set(final Vec3d source) {
-        return set(source.xCoord, source.yCoord, source.zCoord);
+        return set(source.x, source.y, source.z);
     }
 
     public MBlockPos set(final Vec3i source) {
